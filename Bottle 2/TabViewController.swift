@@ -26,6 +26,7 @@ class TabViewController: UITabBarController {
         //teams
         let teamsTableViewController = TeamsTableViewController()
         let teamNavigationController = UINavigationController(rootViewController: teamsTableViewController)
+        teamsTableViewController.tabViewControllerInstance = self
         teamNavigationController.tabBarItem = UITabBarItem(title: "Teams", image: UIImage(named: "teams"), tag: 1)
         
         //members
