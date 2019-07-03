@@ -44,15 +44,11 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             if loggedIn == true {
                 // do something
                 self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
-                
                 // load new workspace contents
-                
-//                print(workspace)
+                getTasks(userId: self.tabViewControllerInstance?.userId ?? 6)
                 DispatchQueue.main.async {
-                    self.getTasks(userId: self.tabViewControllerInstance?.userId ?? 6)
+                    self.collectionView.reloadData()
                 }
-                collectionView.reloadData()
-                
             }
             else {
                 presentLoginController()
@@ -106,6 +102,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             cell.titleLabel.text = "Tasks"
             cell.tasksForMe = self.tasksForMe
             cell.tasksByMe = self.tasksByMe
+            DispatchQueue.main.async {
+                cell.collectionView.reloadData()
+            }
             return cell
         }
     }
@@ -125,11 +124,10 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
     
-    @objc func openWorkspace() {
-        print("open workspace view controller")
-    }
-    
     private func getTasks(userId: Int) {
+        
+        tasksForMe = []
+        tasksByMe = []
         
         let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
         
@@ -182,6 +180,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 break
             }
         }
+
     }
     
 }

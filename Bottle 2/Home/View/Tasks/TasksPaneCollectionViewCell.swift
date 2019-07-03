@@ -45,6 +45,9 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PerTaskCollectionViewCell
         cell.titleLabel.text = indexPath.item % 2 == 0 ? "For Me" : "By Me"
         cell.tasks = indexPath.item % 2 == 0 ? tasksForMe : tasksByMe
+        DispatchQueue.main.async {
+            cell.tableView.reloadData()
+        }
 //        cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
         return cell
     }

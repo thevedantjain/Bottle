@@ -36,10 +36,7 @@ class TeamsTableViewController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.getProjects(userId: self.tabViewControllerInstance?.userId ?? 6)
-        }
-        tableView.reloadData()
+        self.getProjects(userId: self.tabViewControllerInstance?.userId ?? 6)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,17 +68,19 @@ class TeamsTableViewController: UITableViewController {
     
     func getProjects(userId: Int) {
         
+        teams = []
+        
+        print("Getting projects for workspace " + String(self.tabViewControllerInstance?.workspace ?? -1) + " and userId " + String(userId))
+        
         let url = "https://wg9fx8sfq8.execute-api.ap-south-1.amazonaws.com/default/projects"
         
         let parameters = [
             "createdBy": userId
         ]
         
-        let header = [
-            "Content-type": "application/json"
-        ]
+//        let headers = []
         
-        Alamofire.request(url, method: .get, parameters: parameters, headers: header).responseJSON { (response) in
+        Alamofire.request(url, method: .get, parameters: parameters, headers: [:]).responseJSON { (response) in
             switch response.result {
             case .success:
                 guard let items = response.result.value as? [[String:AnyObject]] else {return}
@@ -89,9 +88,14 @@ class TeamsTableViewController: UITableViewController {
                     self.teams.append(element["name"] as! String)
                 }
                 break
-            case .failure:
+            case .failure(let err):
+                print(err)
                 break
             }
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
         
     }
