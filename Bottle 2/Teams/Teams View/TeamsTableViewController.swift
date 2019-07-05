@@ -13,6 +13,8 @@ private let teamCellID = "teamCellID"
 
 class TeamsTableViewController: UITableViewController {
     
+    let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7), UIColor(red:0.18, green:0.60, blue:0.68, alpha:1.0), UIColor(red:0.89, green:0.56, blue:0.37, alpha:1.0)]
+    
     var teams: [String] = []
     
     var tabViewControllerInstance: TabViewController?
@@ -51,7 +53,7 @@ class TeamsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: teamCellID, for: indexPath) as! TeamTableViewCell
-        cell.backgroundCard.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0)
+        cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
         cell.titleLabel.text = teams[indexPath.item]
         cell.descLabel.text = "Lorem Ipsum"
         cell.numberOfMembersLabel.text = String(7) + " members"

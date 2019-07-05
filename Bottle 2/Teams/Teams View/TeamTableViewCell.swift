@@ -26,6 +26,7 @@ class TeamTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textColor = .white
         return label
     }()
     
@@ -34,6 +35,7 @@ class TeamTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 8
+        label.textColor = .white
         return label
     }()
     
@@ -42,6 +44,7 @@ class TeamTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textColor = .white
         label.textAlignment = .right
         return label
     }()

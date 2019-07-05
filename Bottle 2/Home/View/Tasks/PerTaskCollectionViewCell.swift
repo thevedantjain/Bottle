@@ -13,6 +13,8 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     
     var tasks: [Task]?
     
+    var color: UIColor?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -26,7 +28,6 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
         let view = UIView()
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0)
         view.layer.masksToBounds = true
         return view
     }()
@@ -34,7 +35,7 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .black
+        label.textColor = .white
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,13 +44,12 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     let tableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.separatorColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
-        view.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0)
+        view.separatorColor = .white
         return view
     }()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks?.count ?? 0
+        return tasks?.count ?? 4
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -59,8 +59,14 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! TaskTableViewCell
         cell.titleLabel.text = tasks?[indexPath.item].title ?? "Hello"
+//        cell.titleLabel.backgroundColor = color
+        cell.backgroundColor = color?.withAlphaComponent(0.0)
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40.0
     }
     
     

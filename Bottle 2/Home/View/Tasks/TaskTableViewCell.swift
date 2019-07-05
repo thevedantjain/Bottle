@@ -25,19 +25,19 @@ class TaskTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
         return label
     }()
     
     fileprivate func setupTitleLabel() {
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
     }
     
     func setupViews() {
-        
-        self.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0)
+    
         addSubview(titleLabel)
         setupTitleLabel()
         

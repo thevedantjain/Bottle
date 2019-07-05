@@ -17,6 +17,8 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     var tasksByMe: [Task]?
     var tasksForMe: [Task]?
     
+    let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7)]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -45,7 +47,10 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PerTaskCollectionViewCell
         cell.titleLabel.text = indexPath.item % 2 == 0 ? "For Me" : "By Me"
         cell.tasks = indexPath.item % 2 == 0 ? tasksForMe : tasksByMe
+        cell.color = colors[indexPath.item % colors.count]
+        cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
         DispatchQueue.main.async {
+            cell.tableView.backgroundColor = .clear
             cell.tableView.reloadData()
         }
 //        cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green

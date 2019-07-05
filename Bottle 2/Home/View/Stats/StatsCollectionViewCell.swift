@@ -13,6 +13,8 @@ private let statCellID = "statCellID"
 
 class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7), UIColor(red:0.18, green:0.60, blue:0.68, alpha:1.0), UIColor(red:0.89, green:0.56, blue:0.37, alpha:1.0)]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -36,7 +38,6 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
         return label
     }()
     
@@ -97,7 +98,7 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cellCollectionView.dequeueReusableCell(withReuseIdentifier: statCellID, for: indexPath) as! PerStatCollectionViewCell
-        cell.backgroundCard.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0)
+        cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
         cell.titleLabel.text = "Title"
         cell.bodyLabel.text = "Body text haha haha"
         cell.progressLabel.text = String(75)
