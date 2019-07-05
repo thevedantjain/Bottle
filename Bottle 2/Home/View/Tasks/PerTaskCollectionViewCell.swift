@@ -11,7 +11,7 @@ private let cellID = "cellID"
 
 class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
     
-    var tasks: [String]?
+    var tasks: [Task]?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,7 +58,7 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! TaskTableViewCell
-        cell.titleLabel.text = tasks?[indexPath.item] ?? "Hello"
+        cell.titleLabel.text = tasks?[indexPath.item].title ?? "Hello"
         cell.selectionStyle = .none
         return cell
     }

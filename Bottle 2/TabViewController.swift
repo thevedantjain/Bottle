@@ -32,6 +32,7 @@ class TabViewController: UITabBarController {
         //members
         let membersTableViewController = MembersTableViewController()
         let membersNavigationController = UINavigationController(rootViewController: membersTableViewController)
+        membersTableViewController.tabViewControllerInstance = self
         membersNavigationController.tabBarItem = UITabBarItem(title: "Members", image: UIImage(named: "members"), tag: 2)
 
         //add to tab bar

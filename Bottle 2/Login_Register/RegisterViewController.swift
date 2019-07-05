@@ -117,7 +117,7 @@ class RegisterViewController: UIViewController {
     
     let emailTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Email"
+        tf.placeholder = "Username"
         tf.autocapitalizationType = UITextAutocapitalizationType.none
         tf.textAlignment = .center
         tf.translatesAutoresizingMaskIntoConstraints = false

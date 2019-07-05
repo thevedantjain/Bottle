@@ -14,8 +14,8 @@ private let cellID = "cellID"
 class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var userId: Int?
-    var tasksByMe: [String]?
-    var tasksForMe: [String]?
+    var tasksByMe: [Task]?
+    var tasksForMe: [Task]?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

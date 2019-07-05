@@ -16,6 +16,8 @@ class TeamsTableViewController: UITableViewController {
     var teams: [String] = []
     
     var tabViewControllerInstance: TabViewController?
+    
+    let dispatchGroup: DispatchGroup = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +35,14 @@ class TeamsTableViewController: UITableViewController {
         tableView.backgroundColor = .white
         
         tableView.separatorStyle = .none
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
         self.getProjects(userId: self.tabViewControllerInstance?.userId ?? 6)
+        dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,9 +74,11 @@ class TeamsTableViewController: UITableViewController {
     
     func getProjects(userId: Int) {
         
-        teams = []
+        LoadingOverlay.shared.showOverlay(view: self.view)
         
-        print("Getting projects for workspace " + String(self.tabViewControllerInstance?.workspace ?? -1) + " and userId " + String(userId))
+        dispatchGroup.enter()
+        
+        teams = []
         
         let url = "https://wg9fx8sfq8.execute-api.ap-south-1.amazonaws.com/default/projects"
         
@@ -87,15 +95,13 @@ class TeamsTableViewController: UITableViewController {
                 for element in items {
                     self.teams.append(element["name"] as! String)
                 }
+                self.dispatchGroup.leave()
+                LoadingOverlay.shared.hideOverlayView()
                 break
             case .failure(let err):
                 print(err)
                 break
             }
-        }
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
         }
         
     }
