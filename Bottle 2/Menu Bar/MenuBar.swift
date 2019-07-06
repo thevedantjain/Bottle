@@ -13,6 +13,7 @@ private let cellID = "cellID"
 class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var teamOverviewCollectionViewControllerInstance: TeamOverviewCollectionViewController?
+    var tasksPaneCollectionViewInstance: TasksPaneCollectionViewCell?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -46,6 +47,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         teamOverviewCollectionViewControllerInstance?.scrollToMenuIndex(menuIndex: indexPath.item)
+        tasksPaneCollectionViewInstance?.scrollToMenuIndex(menuIndex: indexPath.item)
     }
     
     fileprivate func setupCollectionView() {
@@ -75,15 +77,30 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let horizontalBar: UIView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = UIColor(white: 0, alpha: 0.8)
             return view
         }()
+        
+        let backgroundCard: UIView = {
+            let view = UIView()
+            view.layer.cornerRadius = 10
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.backgroundColor = UIColor(white: 0, alpha: 0.1)
+            view.layer.masksToBounds = true
+            return view
+        }()
+        
+        horizontalBar.addSubview(backgroundCard)
+        backgroundCard.topAnchor.constraint(equalTo: horizontalBar.topAnchor, constant: 6).isActive = true
+        backgroundCard.leadingAnchor.constraint(equalTo: horizontalBar.leadingAnchor, constant: 8).isActive = true
+        backgroundCard.trailingAnchor.constraint(equalTo: horizontalBar.trailingAnchor, constant: -8).isActive = true
+        backgroundCard.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
         self.addSubview(horizontalBar)
         horizontalBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalBarLeftAnchorConstraint = horizontalBar.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAnchorConstraint?.isActive = true
         horizontalBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
-        horizontalBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        horizontalBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
     

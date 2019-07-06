@@ -36,7 +36,7 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -65,7 +65,7 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
     }
     
     fileprivate func setupCellCollectionView() {
-        cellCollectionView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 16).isActive = true
+        cellCollectionView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 8).isActive = true
         cellCollectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         cellCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         cellCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
@@ -88,8 +88,6 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
         cellCollectionView.dataSource = self
         cellCollectionView.delegate = self
         cellCollectionView.register(PerStatCollectionViewCell.self, forCellWithReuseIdentifier: statCellID)
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

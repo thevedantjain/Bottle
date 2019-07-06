@@ -28,6 +28,23 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         fatalError("init(coder:) has not been implemented")
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 2
+    }
+    
+    func scrollToMenuIndex(menuIndex: Int) {
+        let indexPath = IndexPath(item: menuIndex, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition(), animated: true)
+    }
+    
+    lazy var menuBar: MenuBar = {
+        let menuBar = MenuBar()
+        menuBar.teamOverviewCollectionViewControllerInstance = nil
+        menuBar.tasksPaneCollectionViewInstance = self
+        menuBar.translatesAutoresizingMaskIntoConstraints = false
+        return menuBar
+    }()
+
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -35,7 +52,8 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         view.showsHorizontalScrollIndicator = false
-//        view.isPagingEnabled = true
+        view.isPagingEnabled = true
+        view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return view
     }()
     
@@ -45,28 +63,21 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PerTaskCollectionViewCell
-        cell.titleLabel.text = indexPath.item % 2 == 0 ? "For Me" : "By Me"
         cell.tasks = indexPath.item % 2 == 0 ? tasksForMe : tasksByMe
         cell.color = colors[indexPath.item % colors.count]
-        cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
         DispatchQueue.main.async {
             cell.tableView.backgroundColor = .clear
             cell.tableView.reloadData()
         }
-//        cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 400)
+        return CGSize(width: self.frame.width, height: 400)
     }
     
     var titleLabel: UILabel = {
@@ -82,6 +93,13 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         return control
     }()
     
+    private func setupMenuBar() {
+        menuBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        menuBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        menuBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
     fileprivate func setupTitleLabel() {
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
@@ -91,23 +109,25 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     
     
     fileprivate func setupCollectionView() {
-        collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        collectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor, constant: 8).isActive = true
         collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
     }
     
     func setupViews() {
         
         addSubview(titleLabel)
+        setupTitleLabel()
+        
+        addSubview(menuBar)
+        setupMenuBar()
         
         addSubview(collectionView)
         
         collectionView.register(PerTaskCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        setupTitleLabel()
         
         setupCollectionView()
         

@@ -48,28 +48,24 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             let loggedIn = UserDefaults.standard.bool(forKey: "userLogin")
             if loggedIn == true {
                 
-                networking(userId: self.tabViewControllerInstance?.userId ?? 6)
-                
-                dispatchGroup.notify(queue: .main) {
-                    if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
-                        print("print", self.workspaces)
-                        self.openWorkspaceView()
+                // minimize network calls
+                // only call if some change has occurred
+                if tabViewControllerInstance?.changesOccurred ?? true || tasksByMe.isEmpty == true || tasksForMe.isEmpty == true {
+                    networking(userId: self.tabViewControllerInstance?.userId ?? 6)
+                    
+                    dispatchGroup.notify(queue: .main) {
+                        if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
+                            self.openWorkspaceView()
+                        }
+                        self.collectionView.reloadData()
                     }
-                    self.collectionView.reloadData()
+                    
+                    tabViewControllerInstance?.workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
+                    
+                    self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
+                    
+                    tabViewControllerInstance?.changesOccurred = false
                 }
-                
-                // get workspace
-                
-                
-                tabViewControllerInstance?.workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
-                
-                // do something
-                self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
-                // load new workspace contents
-//
-//                DispatchQueue.main.async {
-//                    self.collectionView.reloadData()
-//                }
                 
             }
             else {
@@ -112,7 +108,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: statsCellID, for: indexPath) as! StatsCollectionViewCell
             cell.titleLabel.text = "Stats"
-            cell.subtitleLabel.text = ""
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE, MMMM dd"
+            cell.subtitleLabel.text = dateFormatter.string(from: Date())
             return cell
         }
         else {

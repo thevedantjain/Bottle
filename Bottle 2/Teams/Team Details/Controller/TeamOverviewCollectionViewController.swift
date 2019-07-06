@@ -62,6 +62,7 @@ class TeamOverviewCollectionViewController: UICollectionViewController, UICollec
         let menuBar = MenuBar()
         menuBar.teamOverviewCollectionViewControllerInstance = self
         menuBar.translatesAutoresizingMaskIntoConstraints = false
+        menuBar.tasksPaneCollectionViewInstance = nil
         return menuBar
     }()
     

@@ -48,9 +48,15 @@ class WorkspacesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = workspaces?[indexPath.item] ?? -1
-        UserDefaults.standard.set(workspaces?[indexPath.item] ?? -1, forKey: "selectedWorkspace")
-        self.dismiss(animated: true, completion: nil)
+        if homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace == workspaces?[indexPath.item] ?? -1 {
+            self.dismiss(animated: true, completion: nil)
+        }
+        else {
+            homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = workspaces?[indexPath.item] ?? -1
+            homeCollectionViewControllerInstance?.tabViewControllerInstance?.changesOccurred = true
+            UserDefaults.standard.set(workspaces?[indexPath.item] ?? -1, forKey: "selectedWorkspace")
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     

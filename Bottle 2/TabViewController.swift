@@ -12,6 +12,7 @@ class TabViewController: UITabBarController {
     
     var workspace = 1
     var userId = 6
+    var changesOccurred: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
