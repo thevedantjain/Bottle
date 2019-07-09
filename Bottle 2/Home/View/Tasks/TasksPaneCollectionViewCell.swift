@@ -16,6 +16,8 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     var userId: Int?
     var tasksByMe: [Task]?
     var tasksForMe: [Task]?
+    var users: [User]?
+    var mainUser: User?
     
     let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7)]
     
@@ -64,6 +66,9 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PerTaskCollectionViewCell
         cell.tasks = indexPath.item % 2 == 0 ? tasksForMe : tasksByMe
+        cell.taskByMeBool = indexPath.item % 2 == 0 ? false : true
+        cell.users = users
+        cell.mainUser = mainUser
         cell.color = colors[indexPath.item % colors.count]
         DispatchQueue.main.async {
             cell.tableView.backgroundColor = .clear
@@ -132,8 +137,5 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         setupCollectionView()
         
     }
-    
-    
-
     
 }

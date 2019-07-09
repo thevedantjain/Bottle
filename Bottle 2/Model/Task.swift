@@ -9,18 +9,18 @@
 import Foundation
 
 struct Task: Decodable {
-    let id: Int?
-    let title: String?
-    let createdBy: Int?
-    let createdAt: String?
-    let updatedAt: String?
-    let details: String?
-    let isComplete: Int?
-    let assignedTo: Int?
-    let project: Int?
-    let workspace: Int?
+    var id: Int?
+    var title: String?
+    var createdBy: Int?
+    var createdAt: String?
+    var updatedAt: String?
+    var details: String?
+    var isComplete: Int?
+    var assignedTo: Int?
+    var project: Int?
+    var workspace: Int?
 }
 
 struct TaskResponse: Decodable {
-    let tasks: [Task]?
+    var tasks: [Task]?
 }

@@ -12,7 +12,12 @@ class TabViewController: UITabBarController {
     
     var workspace = 1
     var userId = 6
-    var changesOccurred: Bool = true
+    
+    // 0 - no new changes
+    // 1 - workspace changed
+    // 2 - new workspace added;
+    //
+    var state: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +32,7 @@ class TabViewController: UITabBarController {
         //teams
         let teamsTableViewController = TeamsTableViewController()
         let teamNavigationController = UINavigationController(rootViewController: teamsTableViewController)
-        teamsTableViewController.tabViewControllerInstance = self
+        teamsTableViewController.homeCollectionViewControllerInstance = homeCollectionViewController
         teamNavigationController.tabBarItem = UITabBarItem(title: "Teams", image: UIImage(named: "teams"), tag: 1)
         
         //members

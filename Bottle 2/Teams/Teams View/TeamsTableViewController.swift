@@ -17,7 +17,7 @@ class TeamsTableViewController: UITableViewController {
     
     var teams: [String] = []
     
-    var tabViewControllerInstance: TabViewController?
+    var homeCollectionViewControllerInstance: HomeCollectionViewController?
     
     let dispatchGroup: DispatchGroup = DispatchGroup()
 
@@ -38,12 +38,20 @@ class TeamsTableViewController: UITableViewController {
         
         tableView.separatorStyle = .none
         
+        self.getProjects(userId: self.homeCollectionViewControllerInstance?.tabViewControllerInstance?.userId ?? 6)
+        dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.getProjects(userId: self.tabViewControllerInstance?.userId ?? 6)
-        dispatchGroup.notify(queue: .main) {
-            self.tableView.reloadData()
+        if self.homeCollectionViewControllerInstance?.tabViewControllerInstance?.state == 1 {
+            self.getProjects(userId: self.homeCollectionViewControllerInstance?.tabViewControllerInstance?.userId ?? 6)
+            dispatchGroup.notify(queue: .main) {
+                self.tableView.reloadData()
+            }
+            self.homeCollectionViewControllerInstance?.tabViewControllerInstance?.state = 0
         }
     }
     
@@ -87,9 +95,11 @@ class TeamsTableViewController: UITableViewController {
             "createdBy": userId
         ]
         
-//        let headers = []
+        let headers = [
+            "Content-type": "application/json"
+        ]
         
-        Alamofire.request(url, method: .get, parameters: parameters, headers: [:]).responseJSON { (response) in
+        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON { (response) in
             switch response.result {
             case .success:
                 guard let items = response.result.value as? [[String:AnyObject]] else {return}

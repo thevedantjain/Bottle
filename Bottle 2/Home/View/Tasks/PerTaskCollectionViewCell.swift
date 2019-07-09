@@ -13,8 +13,10 @@ private let notaskId = "haha"
 class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
     
     var tasks: [Task]?
-    
+    var users: [User]?
+    var taskByMeBool: Bool?
     var color: UIColor?
+    var mainUser: User?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +44,12 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tapepd item ", String(indexPath.item))
+        DispatchQueue.main.async {
+            let complete = self.tasks?[indexPath.item].isComplete
+            self.tasks?[indexPath.item].isComplete = complete == 1 ? 0 : 1
+            let indexPathArray: [IndexPath] = [indexPath]
+            tableView.reloadRows(at: indexPathArray, with: .automatic)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,8 +59,26 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
             return cell
         }
         else {
+            let task = tasks?[indexPath.item] ?? Task(id: -1, title: "", createdBy: -1, createdAt: "", updatedAt: "", details: "", isComplete: -1, assignedTo: -1, project: -1, workspace: -1)
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! TaskTableViewCell
-            cell.titleLabel.text = tasks?[indexPath.item].title ?? "Hello"
+            cell.titleLabel.text = task.title ?? "Hello"
+            if taskByMeBool == true {
+                for user in users ?? [] {
+                    if task.assignedTo == user.id {
+                        // add details
+                        print("here")
+                        cell.userLabel.text = "Assigned to: " + (user.username ?? "")
+                    }
+                }
+            }
+            else {
+                // add main user details
+                print("here here")
+                cell.userLabel.text = "Assigned by: " + (String(task.createdBy ?? -1))
+            }
+            cell.userLabel.text = "Assigned to: 5"
+            cell.detailsLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fermentum aliquet rutrum. Aenean laoreet viverra augue, id pharetra diam consequat ut."
+            cell.isCompletedView.image = task.isComplete == 1 ? UIImage(named: "completed") : UIImage(named: "not_complete")
             cell.backgroundCard.backgroundColor = color
             cell.selectionStyle = .none
             return cell
@@ -64,7 +89,7 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
         if tasks?.isEmpty == true {
             return 100
         }
-        return 70.0
+        return 170.0
     }
     
     fileprivate func setupTableView() {

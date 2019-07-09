@@ -69,6 +69,8 @@ class MembersTableViewController: UITableViewController {
             "workspaceId": workspace
         ]
         
+        members = []
+        
         Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON { (response) in
             switch response.result {
             case .success:
