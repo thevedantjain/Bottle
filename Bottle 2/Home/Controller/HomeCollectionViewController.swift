@@ -24,6 +24,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     var mainUser: User?
     
+//    let userDispatch: DispatchGroup = DispatchGroup()
     let dispatchGroup: DispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
@@ -69,8 +70,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                             self.openWorkspaceView()
                         }
                         self.collectionView.reloadData()
-                        print("setting main user details")
-                        self.setMainUserDetails()
                     }
                     
                     tabViewControllerInstance?.workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
@@ -167,29 +166,26 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         dispatchGroup.enter()
         
-        getTasks(userId: userId)
+        getTasksByMe(userId: userId) { (tasks) in
+            self.tasksByMe = tasks
+        }
+        
+        getTasksForMe(userId: userId) { (tasks) in
+            self.tasksForMe = tasks
+        }
         
         getWorkspaces(userId: userId)
         
-        getUsers(workspaceId: workspaceId)
+        getUsers(workspaceId: workspaceId) { () in
+            print(self.users)
+            self.tabViewControllerInstance?.users = self.users
+        }
         
         dispatchGroup.leave()
         
     }
     
-    private func setMainUserDetails() {
-        print("USERS USERS USERS")
-        print(users)
-        for user in users {
-            if user.id == tabViewControllerInstance?.userId {
-                print("main user is set")
-                mainUser = user
-                break
-            }
-        }
-    }
-    
-    private func getUsers(workspaceId: Int) {
+    private func getUsers(workspaceId: Int, completion: @escaping () -> ()) {
         
         // get list of users in workspace
         // use userIds to get details of each user
@@ -215,12 +211,20 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     do {
                         let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
                         for element in response {
-                            self.users.append(self.getUserDetails(userId: element.userId ?? -1))
+                            self.getUserDetails(userId: element.userId!, completion: { (user) in
+                                self.users.append(user)
+                                if user.id! == self.tabViewControllerInstance?.userId! {
+                                    self.mainUser = user
+                                }
+                            })
                         }
+                        LoadingOverlay.shared.hideOverlayView()
                     }
                     catch let error {
                         print("error", error)
                     }
+                    print("wtf", self.users)
+                    completion()
                 }
                 break
             case .failure(let error):
@@ -231,7 +235,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
     }
     
-    private func getUserDetails(userId: Int) -> User {
+    private func getUserDetails(userId: Int, completion: @escaping (User) -> ()){
         
         if userId == -1 {print("err")}
         
@@ -255,8 +259,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                         let response = try JSONDecoder().decode([User].self, from: data)
                         for user in response {
                             // only one element
-                            print("MOTHERFUCKER", user)
                             userDetails = User(id: user.id, username: user.username, createdAt: user.createdAt, updatedAt: user.updatedAt)
+                            completion(userDetails!)
                         }
                     }
                     catch let error {
@@ -270,28 +274,64 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 break
             }
         }
-        
-        return userDetails ?? User(id: -1, username: "", createdAt: "", updatedAt: "")
-        
     }
     
-    private func getTasks(userId: Int) {
+    private func getTasksForMe(userId: Int, completion: @escaping ([Task]) -> ()) {
         
         LoadingOverlay.shared.showOverlay(view: self.view)
         
-        dispatchGroup.enter()
+        var tasks: [Task] = []
         
-        tasksForMe = []
-        tasksByMe = []
+        let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
+        
+        // goes into tasksforme
+        let parameters = [
+            "assignedTo": userId
+        ]
+        
+        let header = [
+            "Content-Type": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: parameters, headers: header).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                if let data = response.data {
+                    do {
+                        let response = try JSONDecoder().decode([Task].self, from: data)
+                        for element in response {
+                            tasks.append(element)
+                        }
+                        completion(tasks)
+                    }
+                    catch let error {
+                        print("error", error)
+                    }
+                    LoadingOverlay.shared.hideOverlayView()
+                }
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+        
+    }
+    
+    private func getTasksByMe(userId: Int, completion: @escaping ([Task]) -> ()) {
+        
+        LoadingOverlay.shared.showOverlay(view: self.view)
+        
+        var tasks: [Task] = []
         
         let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
         
         // goes into tasksbyme
-        var parameters = [
+        let parameters = [
             "createdBy": userId
         ]
         
-        var header = [
+        let header = [
             "Content-Type": "application/json"
         ]
         
@@ -302,46 +342,14 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
                         for element in response {
-                            self.tasksByMe.append(element)
+                            tasks.append(element)
                         }
+                        completion(tasks)
                     }
-                        
                     catch let error {
                         print("error", error)
                     }
                     LoadingOverlay.shared.hideOverlayView()
-                }
-                break
-            case .failure(let error):
-                print(error)
-                break
-            }
-        }
-        
-        // goes into tasksForMe
-        parameters = [
-            "assignedTo": userId
-        ]
-        
-        header = [
-            "Content-Type": "application/json"
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: parameters, headers: header).responseJSON { (response) in
-            switch response.result {
-            case .success:
-                if let data = response.data {
-                    do {
-                        let response = try JSONDecoder().decode([Task].self, from: data)
-                        for element in response {
-                            self.tasksByMe.append(element)
-                        }
-                    }
-                    catch let error {
-                        print(error)
-                    }
-                    
-                    self.dispatchGroup.leave()
                 }
                 break
             case .failure(let error):

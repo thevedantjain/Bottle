@@ -10,8 +10,9 @@ import UIKit
 
 class TabViewController: UITabBarController {
     
-    var workspace = 1
-    var userId = 6
+    var workspace: Int? = 1
+    var userId: Int? = 6
+    var users: [User] = []
     
     // 0 - no new changes
     // 1 - workspace changed

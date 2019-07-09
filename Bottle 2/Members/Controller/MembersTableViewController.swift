@@ -12,11 +12,10 @@ import Alamofire
 private let memberCellID = "memberCellID"
 
 class MembersTableViewController: UITableViewController {
-    
-    var members: [Int] = []
-    let dispatchGroup: DispatchGroup = DispatchGroup()
-    
+
+    let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7)]
     var tabViewControllerInstance: TabViewController?
+    var users: [User] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,71 +23,33 @@ class MembersTableViewController: UITableViewController {
         self.title = "Members"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        tableView.separatorStyle = .none
+        
         tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: memberCellID)
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        networking(workspace: tabViewControllerInstance?.workspace ?? -1)
-        dispatchGroup.notify(queue: .main) {
-            self.tableView.reloadData()
-        }
+        users = tabViewControllerInstance?.users ?? [User(id: -1, username: "fuck", createdAt: "", updatedAt: "")]
+        print(users)
+        tableView.reloadData()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return members.count
+        return users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: memberCellID, for: indexPath) as! MemberTableViewCell
-        cell.titleLabel.text = "Member ID: " + String(members[indexPath.item])
+        cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
+        cell.titleLabel.text = "@" + (users[indexPath.item].username ?? "username")
+        cell.idLabel.text = "ID: " + String(users[indexPath.item].id ?? -1)
+        cell.selectionStyle = .none
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("selected row : ", String(indexPath.item))
-    }
-    
-    fileprivate func networking(workspace: Int) {
-        
-        if workspace == -1 {
-            print("error -1")
-        }
-        
-        LoadingOverlay.shared.showOverlay(view: self.view)
-        dispatchGroup.enter()
-        
-        let url = "https://j8008zs2ol.execute-api.ap-south-1.amazonaws.com/default/workspaceusers"
-        
-        let headers = [
-            "Content-type": "application/json"
-        ]
-        
-        let parameters = [
-            "workspaceId": workspace
-        ]
-        
-        members = []
-        
-        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON { (response) in
-            switch response.result {
-            case .success:
-                guard let items = response.result.value as? [[String:AnyObject]] else {
-                    return
-                }
-                for element in items {
-                    self.members.append(element["userId"] as! Int)
-                }
-                self.dispatchGroup.leave()
-                LoadingOverlay.shared.hideOverlayView()
-                break
-            case .failure(let error):
-                print(error)
-                break
-            }
-        }
-        
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
     }
 
 }
