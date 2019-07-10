@@ -45,7 +45,7 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DispatchQueue.main.async {
-            let complete = self.tasks?[indexPath.item].isComplete
+            let complete = self.tasks?[indexPath.item].isComplete ?? 0
             self.tasks?[indexPath.item].isComplete = complete == 1 ? 0 : 1
             let indexPathArray: [IndexPath] = [indexPath]
             tableView.reloadRows(at: indexPathArray, with: .automatic)
@@ -93,7 +93,7 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     }
     
     fileprivate func setupTableView() {
-        tableView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        tableView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         tableView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         tableView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true

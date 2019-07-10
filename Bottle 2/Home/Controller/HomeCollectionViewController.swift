@@ -29,19 +29,21 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView.backgroundColor = .white
-        
-        // Register cell classes
-        self.collectionView!.register(StatsCollectionViewCell.self, forCellWithReuseIdentifier: statsCellID)
-        self.collectionView.register(TasksPaneCollectionViewCell.self, forCellWithReuseIdentifier: tasksPaneCellID)
-        
-        self.title = "User"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(addTask))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openWorkspaceView))
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        collectionView!.register(StatsCollectionViewCell.self, forCellWithReuseIdentifier: statsCellID)
+        collectionView.register(TasksPaneCollectionViewCell.self, forCellWithReuseIdentifier: tasksPaneCellID)
+        
+        collectionView.backgroundColor = .white
+        
+        // Register cell classes
+        
+        
+        self.title = "User"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.addTask))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(self.openWorkspaceView))
 
     }
     
@@ -52,29 +54,28 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             let loggedIn = UserDefaults.standard.bool(forKey: "userLogin")
             if loggedIn == true {
                 
+                tabViewControllerInstance?.workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
+                self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
+                
                 if tabViewControllerInstance?.state == 2 {
                     // new workspace has been added.
                     // send another get request to get details, set it as active workspace
                     getWorkspaces(userId: self.tabViewControllerInstance?.userId ?? 6)
                     self.tabViewControllerInstance?.workspace = workspaces.last ?? -1
+                    UserDefaults.standard.set(workspaces.last, forKey: "selectedWorkspace")
                     print(self.tabViewControllerInstance?.workspace ?? -1)
                 }
                 
                 // minimize network calls
                 // only call if some change has occurred
                 if tabViewControllerInstance?.state ?? 1 != 0 || tasksByMe.isEmpty == true || tasksForMe.isEmpty == true {
-                    networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace ?? 1)
                     
-                    dispatchGroup.notify(queue: .main) {
+                    networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace ?? 1) {
                         if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
                             self.openWorkspaceView()
                         }
                         self.collectionView.reloadData()
                     }
-                    
-                    tabViewControllerInstance?.workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
-                    
-                    self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
                     
                     tabViewControllerInstance?.state = 0
                 }
@@ -98,14 +99,14 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     
     @objc func addTask() {
-        networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace ?? 1)
         
-        dispatchGroup.notify(queue: .main) {
+        networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace ?? 1) {
             if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
                 self.openWorkspaceView()
             }
             self.collectionView.reloadData()
         }
+        
     }
     
     @objc func openWorkspaceView() {
@@ -136,8 +137,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tasksPaneCellID, for: indexPath) as! TasksPaneCollectionViewCell
             cell.userId = self.tabViewControllerInstance?.userId ?? 6
             cell.titleLabel.text = "Tasks"
-            cell.tasksForMe = self.tasksForMe
-            cell.tasksByMe = self.tasksByMe
+            cell.tasksForMe = tasksForMe
+            cell.tasksByMe = tasksByMe
             cell.users = self.users
             cell.mainUser = mainUser
             DispatchQueue.main.async {
@@ -154,7 +155,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         }
         else {
             // tasks pane
-            return CGSize(width: view.frame.width, height: 500)
+            return CGSize(width: view.frame.width, height: 1000)
         }
     }
     
@@ -162,26 +163,31 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
     
-    private func networking(userId: Int, workspaceId: Int) {
+    private func networking(userId: Int, workspaceId: Int, completion: @escaping () -> ()) {
         
         dispatchGroup.enter()
         
         getTasksByMe(userId: userId) { (tasks) in
+            print(tasks)
             self.tasksByMe = tasks
         }
         
         getTasksForMe(userId: userId) { (tasks) in
+            print(tasks)
             self.tasksForMe = tasks
         }
         
         getWorkspaces(userId: userId)
         
         getUsers(workspaceId: workspaceId) { () in
-            print(self.users)
             self.tabViewControllerInstance?.users = self.users
         }
         
         dispatchGroup.leave()
+        
+        dispatchGroup.notify(queue: .main) {
+            completion()
+        }
         
     }
     
@@ -210,21 +216,16 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 if let data = response.data {
                     do {
                         let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
-                        for element in response {
-                            self.getUserDetails(userId: element.userId!, completion: { (user) in
-                                self.users.append(user)
-                                if user.id! == self.tabViewControllerInstance?.userId! {
-                                    self.mainUser = user
-                                }
-                            })
-                        }
+                        self.getUserDetails(users: response, completion: { (users) in
+                            self.users = users
+                            completion()
+                        })
                         LoadingOverlay.shared.hideOverlayView()
                     }
                     catch let error {
                         print("error", error)
                     }
-                    print("wtf", self.users)
-                    completion()
+                    
                 }
                 break
             case .failure(let error):
@@ -235,43 +236,54 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
     }
     
-    private func getUserDetails(userId: Int, completion: @escaping (User) -> ()){
+    private func getUserDetails(users: [WorkspaceUser], completion: @escaping ([User]) -> ()){
         
-        if userId == -1 {print("err")}
+        var userDetailsArray: [User] = []
         
-        let url = "https://qkvee3o84e.execute-api.ap-south-1.amazonaws.com/default/getusers"
+        for user in users {
         
-        let headers = [
-            "Content-type": "application/json"
-        ]
-        
-        let parameters = [
-            "id": userId
-        ]
-        
-        var userDetails: User?
-        
-        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON { (response) in
-            switch response.result {
-            case .success:
-                if let data = response.data {
-                    do {
-                        let response = try JSONDecoder().decode([User].self, from: data)
-                        for user in response {
-                            // only one element
-                            userDetails = User(id: user.id, username: user.username, createdAt: user.createdAt, updatedAt: user.updatedAt)
-                            completion(userDetails!)
+            let userId = user.userId
+            
+            if userId == -1 {print("err")}
+            
+            let url = "https://qkvee3o84e.execute-api.ap-south-1.amazonaws.com/default/getusers"
+            
+            let headers = [
+                "Content-type": "application/json"
+            ]
+            
+            let parameters = [
+                "id": userId
+            ]
+            
+            var userDetails: User?
+            
+            Alamofire.request(url, method: .get, parameters: parameters as Parameters, headers: headers).responseJSON { (response) in
+                switch response.result {
+                case .success:
+                    if let data = response.data {
+                        do {
+                            let response = try JSONDecoder().decode([User].self, from: data)
+                            for user in response {
+                                // only one element
+                                userDetails = User(id: user.id, username: user.username, createdAt: user.createdAt, updatedAt: user.updatedAt)
+                                userDetailsArray.append(userDetails!)
+                                if userId! == self.tabViewControllerInstance?.userId! {
+                                    self.mainUser = userDetails
+                                }
+                            }
+                            if user.userId == users.last?.userId {completion(userDetailsArray)}
                         }
+                        catch let error {
+                            print("error", error)
+                        }
+                        LoadingOverlay.shared.hideOverlayView()
                     }
-                    catch let error {
-                        print("error", error)
-                    }
-                    LoadingOverlay.shared.hideOverlayView()
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
                 }
-                break
-            case .failure(let error):
-                print(error)
-                break
             }
         }
     }
