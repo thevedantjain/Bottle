@@ -14,7 +14,7 @@ private let cellID = "cellID"
 class WorkspacesTableViewController: UITableViewController {
     
     var homeCollectionViewControllerInstance: HomeCollectionViewController?
-    var workspaces: [Int]?
+    var workspaces: [Workspace]?
     let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7)]
 //
 //    override func viewDidAppear(_ animated: Bool) {
@@ -51,7 +51,9 @@ class WorkspacesTableViewController: UITableViewController {
         }
         
         let createAction =  UIAlertAction(title: "Create", style: .default) { (alert) in
-            self.createWorkspace(name: alertController.textFields?[0].text ?? "errInPostReq")
+            self.createWorkspace(name: alertController.textFields?[0].text ?? "errInPostReq", completion: {
+                self.dismiss(animated: true, completion: nil)
+            })
         }
         
         let dismissAction = UIAlertAction(title: "Dismiss", style: .destructive, handler: nil)
@@ -69,19 +71,18 @@ class WorkspacesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! WorkspaceTableViewCell
         cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
-        cell.titleLabel.text = "Workspace " + String(workspaces?[indexPath.item] ?? -1)
+        cell.titleLabel.text = "Workspace " + String(workspaces?[indexPath.item].id ?? -1)
         cell.selectionStyle = .none
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace == workspaces?[indexPath.item] ?? -1 {
+        if homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace?.id == workspaces?[indexPath.item].id ?? -1 {
             self.dismiss(animated: true, completion: nil)
         }
         else {
-            homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = workspaces?[indexPath.item] ?? -1
-            homeCollectionViewControllerInstance?.tabViewControllerInstance?.state = 1
-            UserDefaults.standard.set(workspaces?[indexPath.item] ?? -1, forKey: "selectedWorkspace")
+            homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = workspaces?[indexPath.item]
+            UserDefaults.standard.set(workspaces?[indexPath.item].id ?? -1, forKey: "selectedWorkspace")
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -90,7 +91,7 @@ class WorkspacesTableViewController: UITableViewController {
         return 100.0
     }
     
-    fileprivate func createWorkspace(name: String) {
+    fileprivate func createWorkspace(name: String, completion: @escaping () -> ()) {
         
         let url = "https://7dq8nzhy1e.execute-api.ap-south-1.amazonaws.com/default/workspace"
         
@@ -107,15 +108,21 @@ class WorkspacesTableViewController: UITableViewController {
             switch response.result {
             case .success:
                 // set workspace variable to new workspace
+                // add the user to the workspace
+                // get workspace data
+                self.homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = self.workspaces?.first
+                completion()
                 break
             case .failure(let error):
                 print(error)
                 break
             }
         }
+    }
+    
+    fileprivate func getWorkspaceDetails(createdBy: Int, completion: @escaping () -> ()) {
         
-        homeCollectionViewControllerInstance?.tabViewControllerInstance?.state = 2
-        self.dismiss(animated: true, completion: nil)
+        
         
     }
 

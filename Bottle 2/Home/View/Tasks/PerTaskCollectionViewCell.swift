@@ -66,14 +66,12 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
                 for user in users ?? [] {
                     if task.assignedTo == user.id {
                         // add details
-                        print("here")
                         cell.userLabel.text = "Assigned to: " + (user.username ?? "")
                     }
                 }
             }
             else {
                 // add main user details
-                print("here here")
                 cell.userLabel.text = "Assigned by: " + (String(task.createdBy ?? -1))
             }
             cell.userLabel.text = "Assigned to: 5"

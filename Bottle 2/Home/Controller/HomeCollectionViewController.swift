@@ -19,7 +19,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     var tasksByMe: [Task] = []
     var tasksForMe: [Task] = []
     
-    var workspaces: [Int] = []
+    var workspaces: [Workspace] = []
     var users: [User] = []
     
     var mainUser: User?
@@ -29,6 +29,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // to detect shake gesture
+        self.becomeFirstResponder()
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -54,31 +57,18 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             let loggedIn = UserDefaults.standard.bool(forKey: "userLogin")
             if loggedIn == true {
                 
-                tabViewControllerInstance?.workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
-                self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
-                
-                if tabViewControllerInstance?.state == 2 {
-                    // new workspace has been added.
-                    // send another get request to get details, set it as active workspace
-                    getWorkspaces(userId: self.tabViewControllerInstance?.userId ?? 6)
-                    self.tabViewControllerInstance?.workspace = workspaces.last ?? -1
-                    UserDefaults.standard.set(workspaces.last, forKey: "selectedWorkspace")
-                    print(self.tabViewControllerInstance?.workspace ?? -1)
-                }
-                
-                // minimize network calls
-                // only call if some change has occurred
-                if tabViewControllerInstance?.state ?? 1 != 0 || tasksByMe.isEmpty == true || tasksForMe.isEmpty == true {
-                    
-                    networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace ?? 1) {
-                        if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
-                            self.openWorkspaceView()
-                        }
-                        self.collectionView.reloadData()
+                if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
+                    getWorkspaces(userId: self.tabViewControllerInstance?.userId ?? 6) { (workspacesArray) in
+                        self.workspaces = workspacesArray
+                        self.openWorkspaceView()
                     }
-                    
-                    tabViewControllerInstance?.state = 0
                 }
+                
+                else {
+                    reloadData()
+                }
+                
+                self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
                 
             }
             else {
@@ -100,12 +90,10 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     @objc func addTask() {
         
-        networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace ?? 1) {
-            if UserDefaults.standard.object(forKey: "selectedWorkspace") == nil {
-                self.openWorkspaceView()
-            }
-            self.collectionView.reloadData()
-        }
+        // take input (make a new view?)
+        // add tasks to projects parameters: title, createdBy, workspace, details, assignedTo, project
+        // send get request to get taskId (will have to loop through response and search with title
+        // need to add tasks to projects separately
         
     }
     
@@ -122,6 +110,20 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         // #warning Incomplete implementation, return the number of items
         // 2 (1 stats cell, 1 tasks cell)
         return 2
+    }
+    
+    // to detect shake gesture
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
+    // shake gesture
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            reloadData()
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -163,21 +165,27 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         return UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
     }
     
+    fileprivate func reloadData() {
+        networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace?.id ?? 1) {
+            self.collectionView.reloadData()
+        }
+    }
+    
     private func networking(userId: Int, workspaceId: Int, completion: @escaping () -> ()) {
         
         dispatchGroup.enter()
         
         getTasksByMe(userId: userId) { (tasks) in
-            print(tasks)
             self.tasksByMe = tasks
         }
         
         getTasksForMe(userId: userId) { (tasks) in
-            print(tasks)
             self.tasksForMe = tasks
         }
         
-        getWorkspaces(userId: userId)
+        getWorkspaces(userId: userId) { (workspacesArray) in
+            self.workspaces = workspacesArray
+        }
         
         getUsers(workspaceId: workspaceId) { () in
             self.tabViewControllerInstance?.users = self.users
@@ -372,7 +380,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
     }
     
-    private func getWorkspaces(userId: Int) {
+    private func getWorkspaces(userId: Int, completion: @escaping ([Workspace]) -> ()) {
         
         LoadingOverlay.shared.showOverlay(view: self.view)
         
@@ -391,11 +399,18 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         Alamofire.request(url, method: .get, parameters: parameters, headers: header).responseJSON { (response) in
             switch response.result {
             case .success:
-                guard let items = response.result.value as? [[String:AnyObject]] else {
-                    return
-                }
-                for element in items {
-                    self.workspaces.append(element["workspaceId"] as! Int)
+                if let data = response.data {
+                    do {
+                        let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
+                        self.getWorkspaceDetails(ids: response, completion: { (workspacesArray) in
+                            completion(workspacesArray)
+                        })
+                        
+                    }
+                    catch let error {
+                        print("error", error)
+                    }
+                    LoadingOverlay.shared.hideOverlayView()
                 }
                 LoadingOverlay.shared.hideOverlayView()
                 break
@@ -403,6 +418,49 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 print(error)
                 break
             }
+        }
+        
+    }
+    
+    fileprivate func getWorkspaceDetails(ids: [WorkspaceUser], completion: @escaping ([Workspace]) -> ()) {
+        
+        var workspaceDetailsArray: [Workspace] = []
+        
+        for id in ids {
+            
+            let url = "https://7dq8nzhy1e.execute-api.ap-south-1.amazonaws.com/default/workspace"
+            
+            let parameters = [
+                "id": id.workspaceId
+            ]
+            
+            let headers = [
+                "Content-type": "application/json"
+            ]
+            
+            Alamofire.request(url, method: .get, parameters: parameters as Parameters, headers: headers).responseJSON { (response) in
+                switch response.result {
+                case .success:
+                    if let data = response.data {
+                        do {
+                            let response = try JSONDecoder().decode([Workspace].self, from: data)
+                            for element in response {
+                                workspaceDetailsArray.append(element)
+                            }
+                            if id.workspaceId == ids.last?.workspaceId {completion(workspaceDetailsArray)}
+                        }
+                        catch let error {
+                            print("error", error)
+                        }
+                        LoadingOverlay.shared.hideOverlayView()
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+            }
+            
         }
         
     }
