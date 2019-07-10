@@ -70,9 +70,8 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         cell.users = users
         cell.mainUser = mainUser
         cell.color = colors[indexPath.item % colors.count]
-        cell.backgroundColor = indexPath.item % 2 == 0 ? .green : .red
         DispatchQueue.main.async {
-            cell.tableView.backgroundColor = .clear
+//            cell.tableView.backgroundColor = .clear
             cell.tableView.reloadData()
         }
         return cell
@@ -83,27 +82,7 @@ class TasksPaneCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if indexPath.item == 0 {
-//            // tasks for me
-//            if tasksForMe?.count == 0 {
-//                return CGSize(width: self.frame.width, height: 150)
-//            }
-//            else {
-//                let height = CGFloat(integerLiteral: 170*(tasksForMe?.count ?? 1))
-//                return CGSize(width: self.frame.width, height: height)
-//            }
-//        }
-//        else {
-//            // tasks by me
-//            if tasksByMe?.count == 0 {
-//                return CGSize(width: self.frame.width, height: 150)
-//            }
-//            else {
-//                let height = CGFloat(integerLiteral: 170*(tasksByMe?.count ?? 1))
-//                return CGSize(width: self.frame.width, height: height)
-//            }
-//        }
-        
+
         return CGSize(width: self.frame.width, height: 400)
         
     }

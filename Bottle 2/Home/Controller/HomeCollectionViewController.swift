@@ -137,9 +137,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tasksPaneCellID, for: indexPath) as! TasksPaneCollectionViewCell
             cell.userId = self.tabViewControllerInstance?.userId ?? 6
             cell.titleLabel.text = "Tasks"
-            cell.tasksForMe = tasksForMe
-            cell.tasksByMe = tasksByMe
             cell.users = self.users
+            cell.tasksByMe = tasksByMe
+            cell.tasksForMe = tasksForMe
             cell.mainUser = mainUser
             DispatchQueue.main.async {
                 cell.collectionView.reloadData()
@@ -155,12 +155,12 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         }
         else {
             // tasks pane
-            return CGSize(width: view.frame.width, height: 1000)
+            return CGSize(width: view.frame.width, height: 500)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        return UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
     }
     
     private func networking(userId: Int, workspaceId: Int, completion: @escaping () -> ()) {
