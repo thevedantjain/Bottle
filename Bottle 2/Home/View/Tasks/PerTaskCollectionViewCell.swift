@@ -44,6 +44,9 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tasks?.count == 0 {
+            return
+        }
         DispatchQueue.main.async {
             let complete = self.tasks?[indexPath.item].isComplete ?? 0
             self.tasks?[indexPath.item].isComplete = complete == 1 ? 0 : 1

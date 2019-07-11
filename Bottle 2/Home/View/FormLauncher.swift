@@ -28,11 +28,24 @@ class FormLauncher: NSObject {
     }()
     
     let formView: FormView = {
-        let view = FormView(frame: .zero)
+        let view = FormView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundCard.backgroundColor = .white
         return view
     }()
+    
+    var topAnchorConstraint: NSLayoutConstraint?
+    
+    fileprivate func setupFormView(_ window: UIWindow) {
+        formView.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 8).isActive = true
+        formView.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -8).isActive = true
+        formView.heightAnchor.constraint(equalToConstant: 302).isActive = true
+        topAnchorConstraint = formView.topAnchor.constraint(equalTo: window.bottomAnchor)
+        formView.layoutIfNeeded()
+        formView.instance = self
+        formView.beginEditing(textField: formView.titleTextField)
+        formView.alpha = 0
+    }
     
     func setupViews() {
         
@@ -42,21 +55,13 @@ class FormLauncher: NSObject {
             
             window.addSubview(blackView)
             window.addSubview(formView)
-            window.bringSubviewToFront(formView)
             blackView.frame = window.frame
             blackView.alpha = 0
-//            formView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 600)
-            formView.backgroundColor = .red
-            formView.backgroundCard.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 8).isActive = true
-            formView.backgroundCard.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -8).isActive = true
-            formView.backgroundCard.heightAnchor.constraint(equalToConstant: 286).isActive = true
-            formView.backgroundCard.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: -16).isActive = true
-            formView.instance = self
-            formView.alpha = 1
+
+            setupFormView(window)
             
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 0.5
-                self.formView.frame = CGRect(x: 0, y: self.formView.frame.origin.y - 600, width: window.frame.width, height: 600)
                 self.formView.alpha = 1
             }, completion: nil)
             
@@ -64,29 +69,24 @@ class FormLauncher: NSObject {
         
     }
     
-    @objc func handleDismiss() {
-        
-        if let window = UIApplication.shared.keyWindow {
-            UIView.animate(withDuration: 0.5) {
-                self.blackView.alpha = 0
-                self.formView.frame.origin.y = window.frame.height
-                self.formView.alpha = 1
-            }
+    func handleKeyboard(height: Int) {
+        formView.layoutIfNeeded()
+        UIView.animate(withDuration: 1) {
+            self.topAnchorConstraint?.constant = CGFloat((-318 - height))
+            self.topAnchorConstraint?.isActive = true
+            self.formView.layoutIfNeeded()
         }
     }
     
-}
-
-extension UIView {
-    var firstResponder: UIView? {
-        guard !isFirstResponder else { return self }
-        
-        for subview in subviews {
-            if let firstResponder = subview.firstResponder {
-                return firstResponder
-            }
+    @objc func handleDismiss() {
+        UIView.animate(withDuration:1) {
+            self.topAnchorConstraint?.constant = 0
+            self.formView.layoutIfNeeded()
+            self.formView.endEditing(true)
+            self.formView.clearFields()
+            self.formView.alpha = 0
+            self.blackView.alpha = 0
         }
-        
-        return nil
     }
+    
 }

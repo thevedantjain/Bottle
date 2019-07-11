@@ -45,7 +45,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         
         self.title = "User"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.addTask))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addTask))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(self.openWorkspaceView))
 
     }
@@ -99,9 +99,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         // add tasks to projects parameters: title, createdBy, workspace, details, assignedTo, project
         // send get request to get taskId (will have to loop through response and search with title
         // need to add tasks to projects separately
-
-        print("task button pressed")
-        formLauncher.setupViews()
+        networking(userId: tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace?.id ?? 1) {
+            self.formLauncher.setupViews()
+        }
     
     }
     
