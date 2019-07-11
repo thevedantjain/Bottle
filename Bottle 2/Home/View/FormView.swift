@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -118,9 +119,9 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     func setupViews() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         addSubview(backgroundCard)
         setupBackgroundCard()
@@ -154,7 +155,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         }
         
         if title == "" {
-            handleMessage(title: "Please enter username.")
+            handleMessage(title: "Please enter title.")
             return
         }
         
@@ -163,12 +164,9 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             return
         }
         
-        if assignedPicker.selectedRow(inComponent: 0) == -1 {
-            handleMessage(title: "Please select member.")
+        if assignedPicker.selectedRow(inComponent: 0) == 0 {
+            handleMessage(title: "Please select user.")
             return
-        }
-        else {
-            user = instance?.users[assignedPicker.selectedRow(inComponent: 0)]
         }
         
         self.endEditing(true)
@@ -176,15 +174,15 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
     }
     
-    @objc func keyboardDidShow(notification: NSNotification) {
-        if let height = ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) {
-            instance?.handleKeyboard(height: Int(height.size.height) + 64)
-        }
-    }
-    
-    @objc func keyboardDidHide(notification: NSNotification) {
-        instance?.handleKeyboard(height: 0)
-    }
+//    @objc func keyboardDidShow(notification: NSNotification) {
+//        if let height = ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) {
+//            instance?.handleKeyboard(height: Int(height.size.height) + 64)
+//        }
+//    }
+//    
+//    @objc func keyboardDidHide(notification: NSNotification) {
+//        instance?.handleKeyboard(height: 0)
+//    }
     
     func clearFields() {
         titleTextField.text = ""
@@ -209,9 +207,9 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     fileprivate func setupBackgroundCard() {
-        backgroundCard.heightAnchor.constraint(equalToConstant: 302).isActive = true
-        backgroundCard.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        backgroundCard.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        backgroundCard.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        backgroundCard.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        backgroundCard.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         backgroundCard.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     

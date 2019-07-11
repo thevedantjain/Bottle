@@ -89,7 +89,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     lazy var formLauncher: FormLauncher = {
         let launcher = FormLauncher()
-        launcher.users = self.users
         return launcher
     }()
     
@@ -99,8 +98,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         // add tasks to projects parameters: title, createdBy, workspace, details, assignedTo, project
         // send get request to get taskId (will have to loop through response and search with title
         // need to add tasks to projects separately
-        networking(userId: tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace?.id ?? 1) {
-            self.formLauncher.setupViews()
+        self.formLauncher.setupViews {
+            self.formLauncher.animate()
         }
     
     }
@@ -196,7 +195,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         }
         
         getUsers(workspaceId: workspaceId) { () in
+            print(self.users)
             self.tabViewControllerInstance?.users = self.users
+            self.formLauncher.users = self.users
         }
         
         dispatchGroup.leave()
