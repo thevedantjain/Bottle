@@ -89,6 +89,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     lazy var formLauncher: FormLauncher = {
         let launcher = FormLauncher()
+        launcher.formView.homeCollectionViewControllerInstance = self
         return launcher
     }()
     

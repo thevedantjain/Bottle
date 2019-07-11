@@ -21,6 +21,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     var instance: FormLauncher?
+    var homeCollectionViewControllerInstance: HomeCollectionViewController?
     
     let backgroundCard: UIView = {
         let view = UIView()
@@ -77,6 +78,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.dataSource = self
         picker.delegate = self
+        picker.showsSelectionIndicator = true
         return picker
     }()
     
@@ -102,6 +104,10 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return instance?.users[row].username
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        assignedToTextField.text = instance?.users[row].username
     }
     
     let addButton: UIButton = {
@@ -147,7 +153,6 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         // check if all inputs are valid
         // send requests
-        var user: User?
 
         guard let title = titleTextField.text, let details = detailsTextField.text else {
             handleMessage(title: "Invalid")
@@ -164,25 +169,121 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             return
         }
         
-        if assignedPicker.selectedRow(inComponent: 0) == 0 {
-            handleMessage(title: "Please select user.")
-            return
-        }
-        
         self.endEditing(true)
         // make requests
         
+        let createdBy: Int = homeCollectionViewControllerInstance?.mainUser?.id ?? 6
+        let assignedTo: Int = instance?.users[assignedPicker.selectedRow(inComponent: 0)].id ?? 5
+        let workspace: Int = homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace?.id ?? 1
+        let project: Int = 1
+        
+        createTask(title: title, details: details, createdBy: createdBy, assignedTo: assignedTo, workspace: workspace, project: project) {
+            print("task created")
+            self.getTaskId(title: title, createdBy: createdBy, completion: { (taskId) in
+                print("task id ", taskId)
+                self.postOnProjectTasks(taskId: taskId, projectId: project, completion: {
+                    print("posted")
+                    self.instance?.handleDismiss()
+                })
+            })
+        }
+        
+        
     }
     
-//    @objc func keyboardDidShow(notification: NSNotification) {
-//        if let height = ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) {
-//            instance?.handleKeyboard(height: Int(height.size.height) + 64)
-//        }
-//    }
-//    
-//    @objc func keyboardDidHide(notification: NSNotification) {
-//        instance?.handleKeyboard(height: 0)
-//    }
+    fileprivate func createTask(title: String, details: String, createdBy: Int, assignedTo: Int, workspace: Int, project: Int, completion: @escaping () -> ()) {
+        
+        let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
+        
+        let parameters: Parameters = [
+            "title": title,
+            "createdBy": createdBy,
+            "workspace": workspace,
+            "details": details,
+            "assignedTo": assignedTo,
+            "project": project
+        ]
+        
+        let headers = [
+            "Content-type": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: parameters as Parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                completion()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+        
+    }
+    
+    fileprivate func getTaskId(title: String, createdBy: Int, completion: @escaping (Int) -> ()) {
+        
+        let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
+        
+        let parameters = [
+            "createdBy": createdBy
+        ]
+        
+        let headers = [
+            "Content-type": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: parameters as Parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                if let data = response.data {
+                    do {
+                        let response = try JSONDecoder().decode([Task].self, from: data)
+                        for task in response {
+                            if task.title == title {
+                                completion(task.id ?? -1)
+                            }
+                        }
+                    }
+                    catch let error {
+                        print("error", error)
+                    }
+                    LoadingOverlay.shared.hideOverlayView()
+                }
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+        
+    }
+    
+    fileprivate func postOnProjectTasks(taskId: Int, projectId: Int, completion: @escaping () -> ()) {
+        
+        let url = "https://7d6oe79sn8.execute-api.ap-south-1.amazonaws.com/default/projecttasks"
+        
+        let parameters = [
+            "taskId": taskId,
+            "projectId": projectId
+        ]
+        
+        let headers = [
+            "Content-type": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                completion()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+        
+    }
     
     func clearFields() {
         titleTextField.text = ""
