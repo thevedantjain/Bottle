@@ -87,6 +87,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         self.present(loginViewController, animated: true, completion: nil)
     }
     
+    let formLauncher = FormLauncher()
     
     @objc func addTask() {
         
@@ -94,7 +95,11 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         // add tasks to projects parameters: title, createdBy, workspace, details, assignedTo, project
         // send get request to get taskId (will have to loop through response and search with title
         // need to add tasks to projects separately
-        
+
+        print("task button pressed")
+        formLauncher.users = users
+        formLauncher.setupViews()
+    
     }
     
     @objc func openWorkspaceView() {
