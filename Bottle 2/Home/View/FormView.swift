@@ -24,7 +24,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let backgroundCard: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = 27
         view.layer.masksToBounds = true
         view.backgroundColor = .white
         return view
@@ -33,7 +33,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.text = "Add Task"
         label.textAlignment = .center
         return label
@@ -121,7 +121,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         titleLabel.topAnchor.constraint(equalTo: backgroundCard.topAnchor, constant: 16).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
     }
     
     fileprivate func setupTitleTextField() {

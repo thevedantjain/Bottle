@@ -45,18 +45,19 @@ class FormLauncher: NSObject {
             window.bringSubviewToFront(formView)
             blackView.frame = window.frame
             blackView.alpha = 0
-            
+//            formView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 600)
+            formView.backgroundColor = .red
             formView.backgroundCard.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 8).isActive = true
             formView.backgroundCard.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -8).isActive = true
+            formView.backgroundCard.heightAnchor.constraint(equalToConstant: 286).isActive = true
+            formView.backgroundCard.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: -16).isActive = true
             formView.instance = self
-//            formView.alpha = 0
-            let y = window.frame.height - 500
-            formView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 600)
+            formView.alpha = 1
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 0.5
-                self.formView.frame.origin.y = y
-//                self.formView.alpha = 1
+                self.formView.frame = CGRect(x: 0, y: self.formView.frame.origin.y - 600, width: window.frame.width, height: 600)
+                self.formView.alpha = 1
             }, completion: nil)
             
         }
@@ -69,9 +70,23 @@ class FormLauncher: NSObject {
             UIView.animate(withDuration: 0.5) {
                 self.blackView.alpha = 0
                 self.formView.frame.origin.y = window.frame.height
-                //            self.formView.alpha = 0
+                self.formView.alpha = 1
             }
         }
     }
     
+}
+
+extension UIView {
+    var firstResponder: UIView? {
+        guard !isFirstResponder else { return self }
+        
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder {
+                return firstResponder
+            }
+        }
+        
+        return nil
+    }
 }
