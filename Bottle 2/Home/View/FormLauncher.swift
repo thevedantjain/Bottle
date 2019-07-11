@@ -28,7 +28,7 @@ class FormLauncher: NSObject {
     }()
     
     let formView: FormView = {
-        let view = FormView()
+        let view = FormView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundCard.backgroundColor = .white
         return view
@@ -41,18 +41,21 @@ class FormLauncher: NSObject {
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
             
             window.addSubview(blackView)
+            window.addSubview(formView)
+            window.bringSubviewToFront(formView)
             blackView.frame = window.frame
             blackView.alpha = 0
             
-            window.addSubview(formView)
+            formView.backgroundCard.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 8).isActive = true
+            formView.backgroundCard.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -8).isActive = true
             formView.instance = self
 //            formView.alpha = 0
-            let y = window.frame.height - 400
-            formView.frame = CGRect(x: 0, y: 100, width: window.frame.width, height: 500)
+            let y = window.frame.height - 500
+            formView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 600)
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 0.5
-                self.formView.frame.origin.y = 200
+                self.formView.frame.origin.y = y
 //                self.formView.alpha = 1
             }, completion: nil)
             
@@ -65,8 +68,8 @@ class FormLauncher: NSObject {
         if let window = UIApplication.shared.keyWindow {
             UIView.animate(withDuration: 0.5) {
                 self.blackView.alpha = 0
-                self.formView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 500)
-//                self.formView.alpha = 0
+                self.formView.frame.origin.y = window.frame.height
+                //            self.formView.alpha = 0
             }
         }
     }

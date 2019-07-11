@@ -87,7 +87,11 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         self.present(loginViewController, animated: true, completion: nil)
     }
     
-    let formLauncher = FormLauncher()
+    lazy var formLauncher: FormLauncher = {
+        let launcher = FormLauncher()
+        launcher.users = self.users
+        return launcher
+    }()
     
     @objc func addTask() {
         
@@ -97,7 +101,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         // need to add tasks to projects separately
 
         print("task button pressed")
-        formLauncher.users = users
         formLauncher.setupViews()
     
     }

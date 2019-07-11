@@ -24,7 +24,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let backgroundCard: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
         view.backgroundColor = .white
         return view
@@ -48,6 +48,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         textField.autocapitalizationType = UITextAutocapitalizationType.none
         textField.layer.borderColor = UIColor(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor
         textField.layer.borderWidth = 1
+        textField.textAlignment = .center
         return textField
     }()
     
@@ -60,6 +61,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         textField.autocapitalizationType = UITextAutocapitalizationType.none
         textField.layer.borderColor = UIColor(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor
         textField.layer.borderWidth = 1
+        textField.textAlignment = .center
         return textField
     }()
     
@@ -79,6 +81,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         textField.layer.cornerRadius = 10
         textField.layer.borderColor = UIColor(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor
         textField.layer.borderWidth = 1
+        textField.textAlignment = .center
         return textField
     }()
     
@@ -109,29 +112,29 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     fileprivate func setupBackgroundCard() {
         backgroundCard.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        backgroundCard.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        backgroundCard.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        backgroundCard.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        backgroundCard.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         backgroundCard.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     fileprivate func setupTitleLabel() {
-        titleLabel.topAnchor.constraint(equalTo: backgroundCard.topAnchor, constant: 8).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: backgroundCard.topAnchor, constant: 16).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
     
     fileprivate func setupTitleTextField() {
-        titleTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8).isActive = true
-        titleTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 8).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -8).isActive = true
+        titleTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        titleTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
+        titleTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
         titleTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     fileprivate func setupDetailsTextField() {
         detailsTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8).isActive = true
-        detailsTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 8).isActive = true
-        detailsTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -8).isActive = true
+        detailsTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
+        detailsTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
         detailsTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
@@ -139,19 +142,21 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         assignedToTextField.inputView = assignedPicker
         assignedToTextField.placeholder = instance?.users[0].username ?? "Pick a user"
         assignedToTextField.topAnchor.constraint(equalTo: detailsTextField.bottomAnchor, constant: 8).isActive = true
-        assignedToTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 8).isActive = true
-        assignedToTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -8).isActive = true
+        assignedToTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
+        assignedToTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
         assignedToTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     fileprivate func setupAddButton() {
         addButton.topAnchor.constraint(equalTo: assignedToTextField.bottomAnchor, constant: 8).isActive = true
-        addButton.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 8).isActive = true
-        addButton.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -8).isActive = true
-        addButton.bottomAnchor.constraint(equalTo: backgroundCard.bottomAnchor, constant: -8).isActive = true
+        addButton.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
+        addButton.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
+        addButton.bottomAnchor.constraint(equalTo: backgroundCard.bottomAnchor, constant: -16).isActive = true
     }
     
     func setupViews() {
+        
+        self.backgroundColor = .red
         
         addSubview(backgroundCard)
         setupBackgroundCard()
@@ -178,6 +183,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         // check if all inputs are valid
         // send requests
         print("handling task")
+        instance?.handleDismiss()
         
     }
     
