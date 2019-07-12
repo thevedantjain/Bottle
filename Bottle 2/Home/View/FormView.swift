@@ -366,7 +366,8 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     fileprivate func setupAssignedTextField() {
         assignedToTextField.inputView = assignedPicker
-        
+        assignedToTextField.placeholder = "Assign task to?"
+        assignedToTextField.tintColor = .clear
         assignedToTextField.topAnchor.constraint(equalTo: detailsTextField.bottomAnchor, constant: 8).isActive = true
         assignedToTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
         assignedToTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
@@ -375,6 +376,8 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     fileprivate func setupProjectTextField() {
         projectTextField.inputView = projectPickerView
+        projectTextField.placeholder = "Project"
+        projectTextField.tintColor = .clear
         projectTextField.topAnchor.constraint(equalTo: assignedToTextField.bottomAnchor, constant: 8).isActive = true
         projectTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
         projectTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true

@@ -9,23 +9,23 @@
 import Foundation
 
 // struct returned by api:users
-struct User: Decodable {
+struct User: Codable {
     var id: Int?
     var username: String?
     var createdAt: String?
     var updatedAt: String?
 }
 
-struct UserResponse: Decodable {
+struct UserResponse: Codable {
     var users: [User]?
 }
 
 // struct returned by api:workspaceusers
-struct WorkspaceUser: Decodable {
+struct WorkspaceUser: Codable {
     var userId: Int?
     var workspaceId: Int?
 }
 
-struct WorkspaceUserResponse: Decodable {
+struct WorkspaceUserResponse: Codable {
     var users: [WorkspaceUser]?
 }

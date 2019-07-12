@@ -22,6 +22,11 @@ class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let data = UserDefaults.standard.value(forKey:"selectedWorkspace") as? Data {
+            workspace = try? PropertyListDecoder().decode(Workspace.self, from: data)
+        }
+        
         tabBar.isTranslucent = true
         
         //home page

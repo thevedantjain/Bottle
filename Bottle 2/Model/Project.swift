@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Project: Decodable {
+struct Project: Codable {
     var id: Int?
     var name: String?
     var createdBy: Int?

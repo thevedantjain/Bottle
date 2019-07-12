@@ -109,15 +109,12 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     @objc func openWorkspaceView() {
         let workspaceViewController = WorkspacesTableViewController()
         let workspaceNavigationController = UINavigationController(rootViewController: workspaceViewController)
-//        self.navigationController?.pushViewController(workspaceViewController, animated: true)
         workspaceViewController.homeCollectionViewControllerInstance = self
         workspaceViewController.workspaces = self.workspaces
         self.present(workspaceNavigationController, animated: true, completion: nil)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        // 2 (1 stats cell, 1 tasks cell)
         return 2
     }
     

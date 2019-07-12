@@ -82,7 +82,8 @@ class WorkspacesTableViewController: UITableViewController {
         }
         else {
             homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = workspaces?[indexPath.item]
-            UserDefaults.standard.set(workspaces?[indexPath.item].id ?? -1, forKey: "selectedWorkspace")
+//            UserDefaults.standard.set(workspaces?[indexPath.item], forKey: "selectedWorkspace")
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(workspaces?[indexPath.item]), forKey:"selectedWorkspace")
             self.dismiss(animated: true, completion: nil)
         }
     }

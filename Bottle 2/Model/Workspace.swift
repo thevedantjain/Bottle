@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Workspace: Decodable {
+struct Workspace: Codable {
     var id: Int?
     var createdBy: Int?
     var createdAt: String?

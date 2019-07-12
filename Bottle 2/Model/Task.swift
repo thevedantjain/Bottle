@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Task: Decodable {
+struct Task: Codable {
     var id: Int?
     var title: String?
     var createdBy: Int?
@@ -21,6 +21,6 @@ struct Task: Decodable {
     var workspace: Int?
 }
 
-struct TaskResponse: Decodable {
+struct TaskResponse: Codable {
     var tasks: [Task]?
 }
