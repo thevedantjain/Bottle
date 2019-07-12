@@ -31,10 +31,10 @@ class TabViewController: UITabBarController {
         homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home"), tag: 0)
         
         //teams
-        let teamsTableViewController = TeamsTableViewController()
-        let teamNavigationController = UINavigationController(rootViewController: teamsTableViewController)
-        teamsTableViewController.homeCollectionViewControllerInstance = homeCollectionViewController
-        teamNavigationController.tabBarItem = UITabBarItem(title: "Teams", image: UIImage(named: "teams"), tag: 1)
+        let projectsTableViewController = ProjectsTableViewController()
+        let projectsNavigationController = UINavigationController(rootViewController: projectsTableViewController)
+        projectsTableViewController.homeCollectionViewControllerInstance = homeCollectionViewController
+        projectsNavigationController.tabBarItem = UITabBarItem(title: "Projects", image: UIImage(named: "projects"), tag: 1)
         
         //members
         let membersTableViewController = MembersTableViewController()
@@ -43,7 +43,7 @@ class TabViewController: UITabBarController {
         membersNavigationController.tabBarItem = UITabBarItem(title: "Members", image: UIImage(named: "members"), tag: 2)
 
         //add to tab bar
-        viewControllers = [homeNavigationController, teamNavigationController, membersNavigationController]
+        viewControllers = [homeNavigationController, projectsNavigationController, membersNavigationController]
     }
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamTableViewCell: UITableViewCell {
+class ProjectTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

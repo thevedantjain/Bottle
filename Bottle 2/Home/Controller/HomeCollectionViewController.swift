@@ -21,6 +21,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     var workspaces: [Workspace] = []
     var users: [User] = []
+    var projects: [Project] = []
     
     var mainUser: User?
     
@@ -181,6 +182,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     private func networking(userId: Int, workspaceId: Int, completion: @escaping () -> ()) {
         
+        LoadingOverlay.shared.showOverlay(view: self.view)
+        
         dispatchGroup.enter()
         
         getTasksByMe(userId: userId) { (tasks) in
@@ -196,14 +199,18 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         }
         
         getUsers(workspaceId: workspaceId) { () in
-            print(self.users)
             self.tabViewControllerInstance?.users = self.users
             self.formLauncher.users = self.users
+        }
+        
+        getProjects(userId: userId) { (projects) in
+            self.projects = projects
         }
         
         dispatchGroup.leave()
         
         dispatchGroup.notify(queue: .main) {
+            LoadingOverlay.shared.hideOverlayView()
             completion()
         }
         
@@ -213,8 +220,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         // get list of users in workspace
         // use userIds to get details of each user
-        
-        LoadingOverlay.shared.showOverlay(view: self.view)
         
         let url = "https://j8008zs2ol.execute-api.ap-south-1.amazonaws.com/default/workspaceusers"
 
@@ -238,7 +243,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                             self.users = users
                             completion()
                         })
-                        LoadingOverlay.shared.hideOverlayView()
                     }
                     catch let error {
                         print("error", error)
@@ -295,7 +299,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                         catch let error {
                             print("error", error)
                         }
-                        LoadingOverlay.shared.hideOverlayView()
                     }
                     break
                 case .failure(let error):
@@ -307,8 +310,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     private func getTasksForMe(userId: Int, completion: @escaping ([Task]) -> ()) {
-        
-        LoadingOverlay.shared.showOverlay(view: self.view)
         
         var tasks: [Task] = []
         
@@ -337,7 +338,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     catch let error {
                         print("error", error)
                     }
-                    LoadingOverlay.shared.hideOverlayView()
                 }
                 break
             case .failure(let error):
@@ -349,8 +349,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     private func getTasksByMe(userId: Int, completion: @escaping ([Task]) -> ()) {
-        
-        LoadingOverlay.shared.showOverlay(view: self.view)
         
         var tasks: [Task] = []
         
@@ -379,7 +377,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     catch let error {
                         print("error", error)
                     }
-                    LoadingOverlay.shared.hideOverlayView()
                 }
                 break
             case .failure(let error):
@@ -391,8 +388,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     private func getWorkspaces(userId: Int, completion: @escaping ([Workspace]) -> ()) {
-        
-        LoadingOverlay.shared.showOverlay(view: self.view)
         
         workspaces = []
         
@@ -420,9 +415,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     catch let error {
                         print("error", error)
                     }
-                    LoadingOverlay.shared.hideOverlayView()
                 }
-                LoadingOverlay.shared.hideOverlayView()
                 break
             case .failure(let error):
                 print(error)
@@ -462,7 +455,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                         catch let error {
                             print("error", error)
                         }
-                        LoadingOverlay.shared.hideOverlayView()
                     }
                     break
                 case .failure(let error):
@@ -471,6 +463,44 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 }
             }
             
+        }
+        
+    }
+    
+    fileprivate func getProjects(userId: Int, completion: @escaping ([Project]) -> ()) {
+        
+        var projectDetailsArray: [Project] = []
+        
+        let url = "https://wg9fx8sfq8.execute-api.ap-south-1.amazonaws.com/default/projects"
+        
+        let parameters = [
+            "createdBy": userId
+        ]
+        
+        let headers = [
+            "Content-type": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                if let data = response.data {
+                    do {
+                        let response = try JSONDecoder().decode([Project].self, from: data)
+                        for element in response {
+                            projectDetailsArray.append(element)
+                            if element.id == response.last?.id {completion(projectDetailsArray)}
+                        }
+                    }
+                    catch let error {
+                        print("error", error)
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err)
+                break
+            }
         }
         
     }

@@ -77,6 +77,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.dataSource = self
+        picker.tag = 1
         picker.delegate = self
         picker.showsSelectionIndicator = true
         return picker
@@ -85,7 +86,6 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let assignedToTextField : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Details"
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10
         textField.layer.borderColor = UIColor(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor
@@ -99,16 +99,42 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return instance?.users.count ?? 0
+        return pickerView.tag == 1 ? instance?.users.count ?? 0 : homeCollectionViewControllerInstance?.projects.count ?? 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return instance?.users[row].username
+        return pickerView.tag == 1 ? instance?.users[row].username : homeCollectionViewControllerInstance?.projects[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        assignedToTextField.text = instance?.users[row].username
+        if pickerView.tag == 1{
+            assignedToTextField.text = instance?.users[row].username
+        }
+        else {
+            projectTextField.text = homeCollectionViewControllerInstance?.projects[row].name
+        }
     }
+    
+    lazy var projectPickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.dataSource = self
+        picker.tag = 2
+        picker.delegate = self
+        picker.showsSelectionIndicator = true
+        return picker
+    }()
+    
+    let projectTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.masksToBounds = true
+        textField.layer.cornerRadius = 10
+        textField.layer.borderColor = UIColor(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor
+        textField.layer.borderWidth = 1
+        textField.textAlignment = .center
+        return textField
+    }()
     
     let addButton: UIButton = {
         let button = UIButton()
@@ -143,6 +169,9 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         addSubview(assignedToTextField)
         setupAssignedTextField()
+        
+        addSubview(projectTextField)
+        setupProjectTextField()
         
         addSubview(addButton)
         setupAddButton()
@@ -337,15 +366,23 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     fileprivate func setupAssignedTextField() {
         assignedToTextField.inputView = assignedPicker
-        assignedToTextField.placeholder = instance?.users[0].username ?? "Pick a user"
+        
         assignedToTextField.topAnchor.constraint(equalTo: detailsTextField.bottomAnchor, constant: 8).isActive = true
         assignedToTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
         assignedToTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
         assignedToTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
+    fileprivate func setupProjectTextField() {
+        projectTextField.inputView = projectPickerView
+        projectTextField.topAnchor.constraint(equalTo: assignedToTextField.bottomAnchor, constant: 8).isActive = true
+        projectTextField.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
+        projectTextField.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
+        projectTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
     fileprivate func setupAddButton() {
-        addButton.topAnchor.constraint(equalTo: assignedToTextField.bottomAnchor, constant: 16).isActive = true
+        addButton.topAnchor.constraint(equalTo: projectTextField.bottomAnchor, constant: 16).isActive = true
         addButton.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor, constant: 16).isActive = true
         addButton.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor, constant: -16).isActive = true
         addButton.bottomAnchor.constraint(equalTo: backgroundCard.bottomAnchor, constant: -16).isActive = true

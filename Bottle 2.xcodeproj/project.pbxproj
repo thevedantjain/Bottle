@@ -24,6 +24,7 @@
 		6F695B2D22D6644700C99106 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B2C22D6644700C99106 /* Workspace.swift */; };
 		6F695B2F22D70C0400C99106 /* FormLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B2E22D70C0400C99106 /* FormLauncher.swift */; };
 		6F695B3122D70D4B00C99106 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3022D70D4B00C99106 /* FormView.swift */; };
+		6F695B3322D86DA400C99106 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3222D86DA400C99106 /* Project.swift */; };
 		6F8EB8772258C743005D6807 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8762258C743005D6807 /* AppDelegate.swift */; };
 		6F8EB8792258C743005D6807 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8782258C743005D6807 /* ViewController.swift */; };
 		6F8EB87C2258C743005D6807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8EB87A2258C743005D6807 /* Main.storyboard */; };
@@ -34,12 +35,12 @@
 		6F8EB89A2258C748005D6807 /* Bottle_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8992258C748005D6807 /* Bottle_2UITests.swift */; };
 		6F8EB8A82258C80B005D6807 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8A72258C80B005D6807 /* TabViewController.swift */; };
 		6F8EB8BB2258C8B7005D6807 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8BA2258C8B7005D6807 /* HomeCollectionViewController.swift */; };
-		6F8EB8BD2258C900005D6807 /* TeamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8BC2258C900005D6807 /* TeamsTableViewController.swift */; };
+		6F8EB8BD2258C900005D6807 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8BC2258C900005D6807 /* ProjectsTableViewController.swift */; };
 		6F8EB8BF2258C968005D6807 /* MembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8BE2258C968005D6807 /* MembersTableViewController.swift */; };
 		6F8EB8C12258CC3C005D6807 /* StatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8C02258CC3C005D6807 /* StatsCollectionViewCell.swift */; };
 		6F8EB8C32258CC6A005D6807 /* TasksPaneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8C22258CC6A005D6807 /* TasksPaneCollectionViewCell.swift */; };
 		6F8EB8C52258CD8A005D6807 /* PerStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8C42258CD8A005D6807 /* PerStatCollectionViewCell.swift */; };
-		6FF95E582258F911003B2CF3 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF95E572258F911003B2CF3 /* TeamTableViewCell.swift */; };
+		6FF95E582258F911003B2CF3 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF95E572258F911003B2CF3 /* ProjectTableViewCell.swift */; };
 		6FF95E5A225920FA003B2CF3 /* TeamOverviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF95E59225920FA003B2CF3 /* TeamOverviewCollectionViewController.swift */; };
 		6FF95E5E22592B80003B2CF3 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF95E5D22592B80003B2CF3 /* MemberTableViewCell.swift */; };
 		6FF95E60225B600D003B2CF3 /* PerTaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF95E5F225B600D003B2CF3 /* PerTaskCollectionViewCell.swift */; };
@@ -83,6 +84,7 @@
 		6F695B2C22D6644700C99106 /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		6F695B2E22D70C0400C99106 /* FormLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLauncher.swift; sourceTree = "<group>"; };
 		6F695B3022D70D4B00C99106 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		6F695B3222D86DA400C99106 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		6F8EB8732258C743005D6807 /* Bottle 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bottle 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8EB8762258C743005D6807 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F8EB8782258C743005D6807 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,12 +101,12 @@
 		6F8EB89B2258C748005D6807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8EB8A72258C80B005D6807 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		6F8EB8BA2258C8B7005D6807 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
-		6F8EB8BC2258C900005D6807 /* TeamsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsTableViewController.swift; sourceTree = "<group>"; };
+		6F8EB8BC2258C900005D6807 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
 		6F8EB8BE2258C968005D6807 /* MembersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersTableViewController.swift; sourceTree = "<group>"; };
 		6F8EB8C02258CC3C005D6807 /* StatsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F8EB8C22258CC6A005D6807 /* TasksPaneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPaneCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F8EB8C42258CD8A005D6807 /* PerStatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerStatCollectionViewCell.swift; sourceTree = "<group>"; };
-		6FF95E572258F911003B2CF3 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
+		6FF95E572258F911003B2CF3 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		6FF95E59225920FA003B2CF3 /* TeamOverviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamOverviewCollectionViewController.swift; sourceTree = "<group>"; };
 		6FF95E5D22592B80003B2CF3 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		6FF95E5F225B600D003B2CF3 /* PerTaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerTaskCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -165,13 +167,13 @@
 			path = "Menu Bar";
 			sourceTree = "<group>";
 		};
-		6F24F4942295B184000DE6A4 /* Teams View */ = {
+		6F24F4942295B184000DE6A4 /* Projects View */ = {
 			isa = PBXGroup;
 			children = (
-				6F8EB8BC2258C900005D6807 /* TeamsTableViewController.swift */,
-				6FF95E572258F911003B2CF3 /* TeamTableViewCell.swift */,
+				6F8EB8BC2258C900005D6807 /* ProjectsTableViewController.swift */,
+				6FF95E572258F911003B2CF3 /* ProjectTableViewCell.swift */,
 			);
-			path = "Teams View";
+			path = "Projects View";
 			sourceTree = "<group>";
 		};
 		6F24F4952295B19B000DE6A4 /* Team Details */ = {
@@ -208,6 +210,7 @@
 				6F45F70722CFD24D00C560B9 /* Task.swift */,
 				6F45F70B22D3C96400C560B9 /* User.swift */,
 				6F695B2C22D6644700C99106 /* Workspace.swift */,
+				6F695B3222D86DA400C99106 /* Project.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,7 +246,7 @@
 				6F24F4932295AFB8000DE6A4 /* Menu Bar */,
 				6F45F6F522C61F3C00C560B9 /* Login_Register */,
 				6F8EB8A92258C82F005D6807 /* Home */,
-				6F8EB8AA2258C834005D6807 /* Teams */,
+				6F8EB8AA2258C834005D6807 /* Projects */,
 				6F8EB8AB2258C83F005D6807 /* Members */,
 				6F8EB8762258C743005D6807 /* AppDelegate.swift */,
 				6F8EB8782258C743005D6807 /* ViewController.swift */,
@@ -284,13 +287,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		6F8EB8AA2258C834005D6807 /* Teams */ = {
+		6F8EB8AA2258C834005D6807 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				6F24F4942295B184000DE6A4 /* Teams View */,
+				6F24F4942295B184000DE6A4 /* Projects View */,
 				6F24F4952295B19B000DE6A4 /* Team Details */,
 			);
-			path = Teams;
+			path = Projects;
 			sourceTree = "<group>";
 		};
 		6F8EB8AB2258C83F005D6807 /* Members */ = {
@@ -609,7 +612,7 @@
 				6F24F48E2295ABEF000DE6A4 /* TeamOverviewView.swift in Sources */,
 				6F45F6F922C6230800C560B9 /* RegisterViewController.swift in Sources */,
 				6F45F6FF22CE785400C560B9 /* LoadingOverlay.swift in Sources */,
-				6F8EB8BD2258C900005D6807 /* TeamsTableViewController.swift in Sources */,
+				6F8EB8BD2258C900005D6807 /* ProjectsTableViewController.swift in Sources */,
 				6F24F4992295B6E8000DE6A4 /* TaskListCollectionViewCell.swift in Sources */,
 				6F695B3122D70D4B00C99106 /* FormView.swift in Sources */,
 				6F24F4922295AF61000DE6A4 /* MenuBarCollectionViewCell.swift in Sources */,
@@ -617,8 +620,9 @@
 				6F24F49F2296A9C0000DE6A4 /* TaskDetailsViewController.swift in Sources */,
 				6F8EB8C52258CD8A005D6807 /* PerStatCollectionViewCell.swift in Sources */,
 				6F695B2D22D6644700C99106 /* Workspace.swift in Sources */,
+				6F695B3322D86DA400C99106 /* Project.swift in Sources */,
 				6F8EB87F2258C743005D6807 /* Bottle_2.xcdatamodeld in Sources */,
-				6FF95E582258F911003B2CF3 /* TeamTableViewCell.swift in Sources */,
+				6FF95E582258F911003B2CF3 /* ProjectTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

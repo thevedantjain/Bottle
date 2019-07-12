@@ -40,10 +40,10 @@ class FormLauncher: NSObject {
     fileprivate func setupFormView(_ window: UIWindow) {
         formView.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 8).isActive = true
         formView.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -8).isActive = true
-        formView.heightAnchor.constraint(equalToConstant: 302).isActive = true
+        formView.heightAnchor.constraint(equalToConstant: 358).isActive = true
         hideFormConstraint = formView.topAnchor.constraint(equalTo: window.bottomAnchor)
         hideFormConstraint?.isActive = true
-        showFormConstraint = formView.bottomAnchor.constraint(equalTo: window.safeAreaLayoutGuide.bottomAnchor, constant: -310)
+        showFormConstraint = formView.bottomAnchor.constraint(equalTo: window.safeAreaLayoutGuide.bottomAnchor, constant: -366)
         formView.instance = self
         formView.beginEditing(textField: formView.titleTextField)
         formView.alpha = 1

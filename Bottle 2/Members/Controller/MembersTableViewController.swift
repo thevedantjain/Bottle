@@ -30,8 +30,12 @@ class MembersTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        if tabViewControllerInstance!.users.isEmpty == true {
+            users = [User(id: -1, username: "couldnotgetdata", createdAt: "", updatedAt: "")]
+            tableView.reloadData()
+            return
+        }
         users = tabViewControllerInstance?.users ?? [User(id: -1, username: "fuck", createdAt: "", updatedAt: "")]
-        print(users)
         tableView.reloadData()
     }
 
