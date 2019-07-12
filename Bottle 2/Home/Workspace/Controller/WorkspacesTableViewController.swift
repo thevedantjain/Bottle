@@ -10,19 +10,13 @@ import UIKit
 import Alamofire
 
 private let cellID = "cellID"
+private let emptyId = "empty"
 
 class WorkspacesTableViewController: UITableViewController {
     
     var homeCollectionViewControllerInstance: HomeCollectionViewController?
     var workspaces: [Workspace]?
     let colors: [UIColor] = [UIColor(red:0.23, green:0.28, blue:0.93, alpha:0.7), UIColor(red:0.86, green:0.34, blue:0.22, alpha:0.7)]
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        DispatchQueue.main.async {
-//
-//        }
-//        tableView.reloadData()
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +28,7 @@ class WorkspacesTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWorkspace))
         
         tableView.register(WorkspaceTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(EmptyWorkspaceTableViewCell.self, forCellReuseIdentifier: emptyId)
         
         tableView.separatorStyle = .none
         
@@ -72,12 +67,19 @@ class WorkspacesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! WorkspaceTableViewCell
-        cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
-        cell.titleLabel.text = workspaces?[indexPath.item].name ?? ""
-        cell.detailTextLabel?.text = "ID: " + String(workspaces?[indexPath.item].id ?? -1)
-        cell.selectionStyle = .none
-        return cell
+        if workspaces?.isEmpty == true {
+            let cell = tableView.dequeueReusableCell(withIdentifier: emptyId) as! EmptyWorkspaceTableViewCell
+            cell.selectionStyle = .none
+            cell.isUserInteractionEnabled = false
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! WorkspaceTableViewCell
+            cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
+            cell.titleLabel.text = workspaces?[indexPath.item].name ?? ""
+            cell.detailTextLabel?.text = "ID: " + String(workspaces?[indexPath.item].id ?? -1)
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -125,10 +127,4 @@ class WorkspacesTableViewController: UITableViewController {
         }
     }
     
-    fileprivate func getWorkspaceDetails(createdBy: Int, completion: @escaping () -> ()) {
-        
-        
-        
-    }
-
 }

@@ -59,6 +59,7 @@ class PerTaskCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITa
         if tasks?.isEmpty == true {
             let cell = tableView.dequeueReusableCell(withIdentifier: notaskId, for: indexPath) as! EmptyTableViewCell
             cell.selectionStyle = .none
+            cell.isUserInteractionEnabled = false
             return cell
         }
         else {

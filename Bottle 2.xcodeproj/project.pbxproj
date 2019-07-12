@@ -25,6 +25,7 @@
 		6F695B2F22D70C0400C99106 /* FormLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B2E22D70C0400C99106 /* FormLauncher.swift */; };
 		6F695B3122D70D4B00C99106 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3022D70D4B00C99106 /* FormView.swift */; };
 		6F695B3322D86DA400C99106 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3222D86DA400C99106 /* Project.swift */; };
+		6F7F0BCA22D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F0BC922D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift */; };
 		6F8EB8772258C743005D6807 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8762258C743005D6807 /* AppDelegate.swift */; };
 		6F8EB8792258C743005D6807 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8782258C743005D6807 /* ViewController.swift */; };
 		6F8EB87C2258C743005D6807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8EB87A2258C743005D6807 /* Main.storyboard */; };
@@ -85,6 +86,7 @@
 		6F695B2E22D70C0400C99106 /* FormLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLauncher.swift; sourceTree = "<group>"; };
 		6F695B3022D70D4B00C99106 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		6F695B3222D86DA400C99106 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		6F7F0BC922D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWorkspaceTableViewCell.swift; sourceTree = "<group>"; };
 		6F8EB8732258C743005D6807 /* Bottle 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bottle 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8EB8762258C743005D6807 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F8EB8782258C743005D6807 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				6F45F6FC22C62FC300C560B9 /* WorkspaceTableViewCell.swift */,
+				6F7F0BC922D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				6F8EB8BD2258C900005D6807 /* ProjectsTableViewController.swift in Sources */,
 				6F24F4992295B6E8000DE6A4 /* TaskListCollectionViewCell.swift in Sources */,
 				6F695B3122D70D4B00C99106 /* FormView.swift in Sources */,
+				6F7F0BCA22D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift in Sources */,
 				6F24F4922295AF61000DE6A4 /* MenuBarCollectionViewCell.swift in Sources */,
 				6F8EB8C12258CC3C005D6807 /* StatsCollectionViewCell.swift in Sources */,
 				6F24F49F2296A9C0000DE6A4 /* TaskDetailsViewController.swift in Sources */,
