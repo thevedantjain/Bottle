@@ -88,8 +88,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         self.present(loginViewController, animated: true, completion: nil)
     }
     
-    lazy var formLauncher: FormLauncher = {
-        let launcher = FormLauncher()
+    lazy var formLauncher: TasksFormLauncher = {
+        let launcher = TasksFormLauncher()
         launcher.formView.homeCollectionViewControllerInstance = self
         return launcher
     }()

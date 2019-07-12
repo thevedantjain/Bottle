@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F00001222D8EF44002106AF /* ProjectFormLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F00001122D8EF44002106AF /* ProjectFormLauncher.swift */; };
+		6F00001422D8EF60002106AF /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F00001322D8EF60002106AF /* ProjectFormView.swift */; };
 		6F24F48E2295ABEF000DE6A4 /* TeamOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F24F48D2295ABEF000DE6A4 /* TeamOverviewView.swift */; };
 		6F24F4902295AF39000DE6A4 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F24F48F2295AF39000DE6A4 /* MenuBar.swift */; };
 		6F24F4922295AF61000DE6A4 /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F24F4912295AF61000DE6A4 /* MenuBarCollectionViewCell.swift */; };
@@ -22,8 +24,8 @@
 		6F45F70A22D06F4500C560B9 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45F70922D06F4500C560B9 /* EmptyTableViewCell.swift */; };
 		6F45F70C22D3C96400C560B9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45F70B22D3C96400C560B9 /* User.swift */; };
 		6F695B2D22D6644700C99106 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B2C22D6644700C99106 /* Workspace.swift */; };
-		6F695B2F22D70C0400C99106 /* FormLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B2E22D70C0400C99106 /* FormLauncher.swift */; };
-		6F695B3122D70D4B00C99106 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3022D70D4B00C99106 /* FormView.swift */; };
+		6F695B2F22D70C0400C99106 /* TasksFormLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B2E22D70C0400C99106 /* TasksFormLauncher.swift */; };
+		6F695B3122D70D4B00C99106 /* TasksFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3022D70D4B00C99106 /* TasksFormView.swift */; };
 		6F695B3322D86DA400C99106 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F695B3222D86DA400C99106 /* Project.swift */; };
 		6F7F0BCA22D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F0BC922D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift */; };
 		6F8EB8772258C743005D6807 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EB8762258C743005D6807 /* AppDelegate.swift */; };
@@ -68,6 +70,8 @@
 
 /* Begin PBXFileReference section */
 		6D44FF5466088659ABF8B9B7 /* Pods-Bottle 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottle 2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bottle 2/Pods-Bottle 2.debug.xcconfig"; sourceTree = "<group>"; };
+		6F00001122D8EF44002106AF /* ProjectFormLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormLauncher.swift; sourceTree = "<group>"; };
+		6F00001322D8EF60002106AF /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
 		6F24F48D2295ABEF000DE6A4 /* TeamOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamOverviewView.swift; sourceTree = "<group>"; };
 		6F24F48F2295AF39000DE6A4 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		6F24F4912295AF61000DE6A4 /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -83,8 +87,8 @@
 		6F45F70922D06F4500C560B9 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		6F45F70B22D3C96400C560B9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6F695B2C22D6644700C99106 /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
-		6F695B2E22D70C0400C99106 /* FormLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLauncher.swift; sourceTree = "<group>"; };
-		6F695B3022D70D4B00C99106 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		6F695B2E22D70C0400C99106 /* TasksFormLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksFormLauncher.swift; sourceTree = "<group>"; };
+		6F695B3022D70D4B00C99106 /* TasksFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksFormView.swift; sourceTree = "<group>"; };
 		6F695B3222D86DA400C99106 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		6F7F0BC922D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWorkspaceTableViewCell.swift; sourceTree = "<group>"; };
 		6F8EB8732258C743005D6807 /* Bottle 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bottle 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +164,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6F00000E22D8EF09002106AF /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				6F695B2E22D70C0400C99106 /* TasksFormLauncher.swift */,
+				6F695B3022D70D4B00C99106 /* TasksFormView.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		6F00000F22D8EF23002106AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6F8EB8BC2258C900005D6807 /* ProjectsTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6F00001022D8EF2B002106AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6FF95E572258F911003B2CF3 /* ProjectTableViewCell.swift */,
+				6F00001122D8EF44002106AF /* ProjectFormLauncher.swift */,
+				6F00001322D8EF60002106AF /* ProjectFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6F24F4932295AFB8000DE6A4 /* Menu Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,8 +203,8 @@
 		6F24F4942295B184000DE6A4 /* Projects View */ = {
 			isa = PBXGroup;
 			children = (
-				6F8EB8BC2258C900005D6807 /* ProjectsTableViewController.swift */,
-				6FF95E572258F911003B2CF3 /* ProjectTableViewCell.swift */,
+				6F00001022D8EF2B002106AF /* View */,
+				6F00000F22D8EF23002106AF /* Controller */,
 			);
 			path = "Projects View";
 			sourceTree = "<group>";
@@ -319,10 +350,9 @@
 		6F8EB8AE2258C85A005D6807 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F00000E22D8EF09002106AF /* Form */,
 				6FF95E562258E41C003B2CF3 /* Tasks */,
 				6FF95E552258E411003B2CF3 /* Stats */,
-				6F695B2E22D70C0400C99106 /* FormLauncher.swift */,
-				6F695B3022D70D4B00C99106 /* FormView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -607,7 +637,7 @@
 				6F24F4972295B32D000DE6A4 /* TaskDetailsCollectionViewCell.swift in Sources */,
 				6F8EB8BB2258C8B7005D6807 /* HomeCollectionViewController.swift in Sources */,
 				6FF95E62225B6510003B2CF3 /* TaskTableViewCell.swift in Sources */,
-				6F695B2F22D70C0400C99106 /* FormLauncher.swift in Sources */,
+				6F695B2F22D70C0400C99106 /* TasksFormLauncher.swift in Sources */,
 				6F45F6F722C61F5300C560B9 /* LoginViewController.swift in Sources */,
 				6F45F70822CFD24D00C560B9 /* Task.swift in Sources */,
 				6F8EB8C32258CC6A005D6807 /* TasksPaneCollectionViewCell.swift in Sources */,
@@ -617,12 +647,14 @@
 				6F45F6FF22CE785400C560B9 /* LoadingOverlay.swift in Sources */,
 				6F8EB8BD2258C900005D6807 /* ProjectsTableViewController.swift in Sources */,
 				6F24F4992295B6E8000DE6A4 /* TaskListCollectionViewCell.swift in Sources */,
-				6F695B3122D70D4B00C99106 /* FormView.swift in Sources */,
+				6F695B3122D70D4B00C99106 /* TasksFormView.swift in Sources */,
 				6F7F0BCA22D8D56E000D9387 /* EmptyWorkspaceTableViewCell.swift in Sources */,
+				6F00001422D8EF60002106AF /* ProjectFormView.swift in Sources */,
 				6F24F4922295AF61000DE6A4 /* MenuBarCollectionViewCell.swift in Sources */,
 				6F8EB8C12258CC3C005D6807 /* StatsCollectionViewCell.swift in Sources */,
 				6F24F49F2296A9C0000DE6A4 /* TaskDetailsViewController.swift in Sources */,
 				6F8EB8C52258CD8A005D6807 /* PerStatCollectionViewCell.swift in Sources */,
+				6F00001222D8EF44002106AF /* ProjectFormLauncher.swift in Sources */,
 				6F695B2D22D6644700C99106 /* Workspace.swift in Sources */,
 				6F695B3322D86DA400C99106 /* Project.swift in Sources */,
 				6F8EB87F2258C743005D6807 /* Bottle_2.xcdatamodeld in Sources */,

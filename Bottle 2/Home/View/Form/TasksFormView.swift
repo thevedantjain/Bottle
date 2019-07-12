@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
+class TasksFormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,7 +20,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var instance: FormLauncher?
+    var instance: TasksFormLauncher?
     var homeCollectionViewControllerInstance: HomeCollectionViewController?
     
     let backgroundCard: UIView = {
@@ -35,7 +35,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 23)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = "Add Task"
         label.textAlignment = .center
         return label
@@ -347,7 +347,7 @@ class FormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         titleLabel.topAnchor.constraint(equalTo: backgroundCard.topAnchor, constant: 16).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: backgroundCard.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: backgroundCard.trailingAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     fileprivate func setupTitleTextField() {

@@ -38,6 +38,24 @@ class ProjectsTableViewController: UITableViewController {
         
         tableView.separatorStyle = .none
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addTask))
+        
+    }
+    
+    lazy var formLauncher: ProjectFormLauncher = {
+        let launcher = ProjectFormLauncher()
+        launcher.formView.homeCollectionViewControllerInstance = self.homeCollectionViewControllerInstance
+        return launcher
+    }()
+    
+    @objc func addTask() {
+        
+        // take input (make a new view?)
+        // parameters: name, createdBy, workspace
+        self.formLauncher.setupViews {
+            self.formLauncher.animate()
+        }
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {

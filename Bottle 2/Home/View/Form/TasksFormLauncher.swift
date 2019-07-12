@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormLauncher: NSObject {
+class TasksFormLauncher: NSObject {
     
     var users: [User] = []
     
@@ -27,8 +27,8 @@ class FormLauncher: NSObject {
         return view
     }()
     
-    let formView: FormView = {
-        let view = FormView()
+    let formView: TasksFormView = {
+        let view = TasksFormView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundCard.backgroundColor = .white
         return view
