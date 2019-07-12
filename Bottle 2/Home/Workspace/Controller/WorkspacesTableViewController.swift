@@ -37,6 +37,9 @@ class WorkspacesTableViewController: UITableViewController {
         
         tableView.separatorStyle = .none
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         if workspaces == nil {
             self.dismiss(animated: true, completion: nil)
         }
@@ -71,7 +74,8 @@ class WorkspacesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! WorkspaceTableViewCell
         cell.backgroundCard.backgroundColor = colors[indexPath.item % colors.count]
-        cell.titleLabel.text = "Workspace " + String(workspaces?[indexPath.item].id ?? -1)
+        cell.titleLabel.text = workspaces?[indexPath.item].name ?? ""
+        cell.detailTextLabel?.text = "ID: " + String(workspaces?[indexPath.item].id ?? -1)
         cell.selectionStyle = .none
         return cell
     }

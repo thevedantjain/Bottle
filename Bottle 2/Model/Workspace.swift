@@ -10,6 +10,7 @@ import Foundation
 
 struct Workspace: Codable {
     var id: Int?
+    var name: String?
     var createdBy: Int?
     var createdAt: String?
     var updatedAt: String?

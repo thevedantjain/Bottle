@@ -10,7 +10,7 @@ import UIKit
 
 class TabViewController: UITabBarController {
     
-    var workspace: Workspace? = Workspace(id: -1, createdBy: -1, createdAt: "", updatedAt: "")
+    var workspace: Workspace? = Workspace(id: -1, name: "", createdBy: -1, createdAt: "", updatedAt: "")
     var userId: Int? = 6
     var users: [User] = []
     

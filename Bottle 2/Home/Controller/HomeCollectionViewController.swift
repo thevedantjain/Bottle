@@ -264,6 +264,10 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         var userDetailsArray: [User] = []
         
+        if users.isEmpty == true {
+            completion([User(id: -1, username: "@err", createdAt: "", updatedAt: "")])
+        }
+        
         for user in users {
         
             let userId = user.userId
@@ -334,10 +338,13 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 if let data = response.data {
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
+                        if response.isEmpty == true {
+                            completion(tasks)
+                        }
                         for element in response {
                             tasks.append(element)
+                            if element.id == response.last?.id {completion(tasks)}
                         }
-                        completion(tasks)
                     }
                     catch let error {
                         print("error", error)
@@ -375,10 +382,13 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 if let data = response.data {
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
+                        if response.isEmpty == true {
+                            completion(tasks)
+                        }
                         for element in response {
                             tasks.append(element)
+                            if element.id == response.last?.id {completion(tasks)}
                         }
-                        completion(tasks)
                     }
                     catch let error {
                         print("error", error)
@@ -436,6 +446,12 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     fileprivate func getWorkspaceDetails(ids: [WorkspaceUser], completion: @escaping ([Workspace]) -> ()) {
         
         var workspaceDetailsArray: [Workspace] = []
+        
+        // if no workspace is available
+        if ids.isEmpty == true {
+            completion([Workspace(id: -1, name: "No workspaces found", createdBy: tabViewControllerInstance?.userId, createdAt: "", updatedAt: "")])
+            return
+        }
         
         for id in ids {
             
@@ -497,6 +513,10 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                 if let data = response.data {
                     do {
                         let response = try JSONDecoder().decode([Project].self, from: data)
+                        if response.isEmpty == true {
+                            completion([Project(id: -1, name: "No projects found", createdBy: self.tabViewControllerInstance?.userId, createdAt: "", updatedAt: "", workspace: self.tabViewControllerInstance?.workspace?.id)])
+                            return
+                        }
                         for element in response {
                             projectDetailsArray.append(element)
                             if element.id == response.last?.id {completion(projectDetailsArray)}
