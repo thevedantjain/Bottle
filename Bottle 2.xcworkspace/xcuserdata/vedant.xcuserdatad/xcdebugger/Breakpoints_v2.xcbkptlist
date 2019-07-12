@@ -6,47 +6,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.347376"
+            timestampString = "584612871.036554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "networking(userId:workspaceId:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int) -&gt; ()"
+                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
                   moduleName = "Bottle 2"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
-                  timestampString = "584435067.027827"
+                  timestampString = "584612871.078909"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "304">
+                  startingLineNumber = "189"
+                  endingLineNumber = "189"
+                  offsetFromSymbolStart = "596">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Array&lt;Bottle_2.Task&gt;) -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
                   moduleName = "Bottle 2"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
-                  timestampString = "584435067.030696"
+                  timestampString = "584612871.081074"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "57">
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "34">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -54,81 +54,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.347443"
+            timestampString = "584612871.036988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "getUserDetails(users:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.3474931"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "getUsers(workspaceId:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.347538"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
-            landmarkName = "getUserDetails(users:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.347582"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "networking(userId:workspaceId:completion:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.347625"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "networking(userId:workspaceId:completion:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.0977139"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "697">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Array&lt;Bottle_2.Task&gt;) -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.100461"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "195"
+                  endingLineNumber = "195"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -166,17 +134,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.347795"
+            timestampString = "584612871.037352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "networking(userId:workspaceId:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.121452"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "798">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Array&lt;Bottle_2.Workspace&gt;) -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.123608"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bottle 2/Home/View/FormView.swift"
-            timestampString = "584611280.347847"
+            timestampString = "584612871.037594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bottle 2/Home/View/FormView.swift"
-            timestampString = "584611280.348191"
+            timestampString = "584612871.037635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
@@ -214,16 +214,416 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
-            timestampString = "584611280.348434"
+            timestampString = "584612871.03767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.130298"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "899">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.138453"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "54">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.037915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.1536011"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
+                  offsetFromSymbolStart = "1000">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 (Swift.Array&lt;Bottle_2.Project&gt;) -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.158698"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.038162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.038377"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.038588"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.03879"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.038991"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.039192"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "networking(userId:workspaceId:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.228318"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "1045">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #6 () -&gt; () in Bottle_2.HomeCollectionViewController.(networking in _97BC2012817FADFFA35B701E24BA3B41)(userId: Swift.Int, workspaceId: Swift.Int, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Bottle 2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vedant/Desktop/Bottle/Bottle%202/Bottle%202/Home/Controller/HomeCollectionViewController.swift"
+                  timestampString = "584612871.231202"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.039389"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "getUsers(workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.039588"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "getUserDetails(users:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.0397871"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
+            landmarkName = "getTasksForMe(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.039989"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "getTasksByMe(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.040189"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
+            landmarkName = "getWorkspaces(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.040388"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
+            landmarkName = "getWorkspaceDetails(ids:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.040586"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "getProjects(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.040784"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "getUsers(workspaceId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.0409859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
+            landmarkName = "getTasksForMe(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.041187"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "getTasksByMe(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.0413851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "getWorkspaces(userId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bottle 2/Home/Controller/HomeCollectionViewController.swift"
+            timestampString = "584612871.0418839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
+            landmarkName = "getProjects(userId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

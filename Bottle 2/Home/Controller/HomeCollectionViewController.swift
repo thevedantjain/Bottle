@@ -182,32 +182,35 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     private func networking(userId: Int, workspaceId: Int, completion: @escaping () -> ()) {
         
-        LoadingOverlay.shared.showOverlay(view: self.view)
-        
-        dispatchGroup.enter()
+        if let window = UIApplication.shared.keyWindow {
+            LoadingOverlay.shared.showOverlay(view: window)
+        }
         
         getTasksByMe(userId: userId) { (tasks) in
             self.tasksByMe = tasks
+            self.dispatchGroup.leave()
         }
         
         getTasksForMe(userId: userId) { (tasks) in
             self.tasksForMe = tasks
+            self.dispatchGroup.leave()
         }
         
         getWorkspaces(userId: userId) { (workspacesArray) in
             self.workspaces = workspacesArray
+            self.dispatchGroup.leave()
         }
         
         getUsers(workspaceId: workspaceId) { () in
             self.tabViewControllerInstance?.users = self.users
             self.formLauncher.users = self.users
+            self.dispatchGroup.leave()
         }
         
         getProjects(userId: userId) { (projects) in
             self.projects = projects
+            self.dispatchGroup.leave()
         }
-        
-        dispatchGroup.leave()
         
         dispatchGroup.notify(queue: .main) {
             LoadingOverlay.shared.hideOverlayView()
@@ -220,6 +223,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         // get list of users in workspace
         // use userIds to get details of each user
+        
+        dispatchGroup.enter()
         
         let url = "https://j8008zs2ol.execute-api.ap-south-1.amazonaws.com/default/workspaceusers"
 
@@ -311,6 +316,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     private func getTasksForMe(userId: Int, completion: @escaping ([Task]) -> ()) {
         
+        dispatchGroup.enter()
+        
         var tasks: [Task] = []
         
         let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
@@ -350,6 +357,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     private func getTasksByMe(userId: Int, completion: @escaping ([Task]) -> ()) {
         
+        dispatchGroup.enter()
+        
         var tasks: [Task] = []
         
         let url = "https://wa01k4ful5.execute-api.ap-south-1.amazonaws.com/default/tasks"
@@ -388,6 +397,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     private func getWorkspaces(userId: Int, completion: @escaping ([Workspace]) -> ()) {
+        
+        dispatchGroup.enter()
         
         workspaces = []
         
@@ -468,6 +479,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     fileprivate func getProjects(userId: Int, completion: @escaping ([Project]) -> ()) {
+        
+        dispatchGroup.enter()
         
         var projectDetailsArray: [Project] = []
         
