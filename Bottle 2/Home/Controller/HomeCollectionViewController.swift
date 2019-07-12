@@ -183,6 +183,14 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             LoadingOverlay.shared.showOverlay(view: window)
         }
         
+        let name = UserDefaults.standard.string(forKey: "username") ?? "err"
+        
+        getUserId(name: name) { (user) in
+            self.mainUser = user
+            self.tabViewControllerInstance?.userId = user.id
+            self.dispatchGroup.leave()
+        }
+        
         getTasksByMe(userId: userId) { (tasks) in
             self.tasksByMe = tasks
             self.dispatchGroup.leave()
@@ -216,6 +224,51 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
     }
     
+    private func getUserId(name: String, completion: @escaping (User) -> ()) {
+        
+        // not a very good way
+        // but server never returns userId anywhere
+        
+        dispatchGroup.enter()
+        
+        if name == "err" {
+            dispatchGroup.leave()
+            return
+        }
+        
+        let url = "https://qkvee3o84e.execute-api.ap-south-1.amazonaws.com/default/getusers"
+        
+        let headers = [
+            "Content-type": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: [:], headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                if let data = response.data {
+                    do {
+                        let response = try JSONDecoder().decode([User].self, from: data)
+                        for element in response {
+                            if element.username == name {
+                                print(element.username, "- found")
+                                completion(element)
+                            }
+                        }
+                    }
+                    catch let error {
+                        print("error", error)
+                    }
+                    
+                }
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+        
+    }
+    
     private func getUsers(workspaceId: Int, completion: @escaping () -> ()) {
         
         // get list of users in workspace
@@ -243,6 +296,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                         let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
                         self.getUserDetails(users: response, completion: { (users) in
                             self.users = users
+                            print("got ", users.count, " users")
                             completion()
                         })
                     }
@@ -296,9 +350,11 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                                 // only one element
                                 userDetails = User(id: user.id, username: user.username, createdAt: user.createdAt, updatedAt: user.updatedAt)
                                 userDetailsArray.append(userDetails!)
-                                if userId! == self.tabViewControllerInstance?.userId! {
-                                    self.mainUser = userDetails
-                                }
+                                // already setting mainUser now
+                                // old code below
+//                                if userId! == self.tabViewControllerInstance?.userId! {
+//                                    self.mainUser = userDetails
+//                                }
                             }
                             if user.userId == users.last?.userId {completion(userDetailsArray)}
                         }
@@ -339,11 +395,15 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
                         if response.isEmpty == true {
+                            print("no tasks for me")
                             completion(tasks)
                         }
                         for element in response {
                             tasks.append(element)
-                            if element.id == response.last?.id {completion(tasks)}
+                            if element.id == response.last?.id {
+                                print(tasks.count, " tasks for me")
+                                completion(tasks)
+                            }
                         }
                     }
                     catch let error {
@@ -383,11 +443,15 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
                         if response.isEmpty == true {
+                            print("no tasks by me")
                             completion(tasks)
                         }
                         for element in response {
                             tasks.append(element)
-                            if element.id == response.last?.id {completion(tasks)}
+                            if element.id == response.last?.id {
+                                print(tasks.count, " tasks by me")
+                                completion(tasks)
+                            }
                         }
                     }
                     catch let error {
@@ -426,6 +490,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                     do {
                         let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
                         self.getWorkspaceDetails(ids: response, completion: { (workspacesArray) in
+                            print("got ", workspacesArray.count, " workspaces")
                             completion(workspacesArray)
                         })
                         
@@ -449,7 +514,8 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         // if no workspace is available
         if ids.isEmpty == true {
-            completion([Workspace(id: -1, name: "No workspaces found", createdBy: tabViewControllerInstance?.userId, createdAt: "", updatedAt: "")])
+            print("got no workspace")
+            completion([])
             return
         }
         
@@ -474,7 +540,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                             for element in response {
                                 workspaceDetailsArray.append(element)
                             }
-                            if id.workspaceId == ids.last?.workspaceId {completion(workspaceDetailsArray)}
+                            if id.workspaceId == ids.last?.workspaceId {
+                                completion(workspaceDetailsArray)
+                            }
                         }
                         catch let error {
                             print("error", error)
@@ -519,7 +587,10 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                         }
                         for element in response {
                             projectDetailsArray.append(element)
-                            if element.id == response.last?.id {completion(projectDetailsArray)}
+                            if element.id == response.last?.id {
+                                print("got ", projectDetailsArray.count, " projects")
+                                completion(projectDetailsArray)
+                            }
                         }
                     }
                     catch let error {
