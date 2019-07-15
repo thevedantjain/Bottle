@@ -26,6 +26,8 @@ class MembersTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: memberCellID)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.selectMembers))
 
     }
     
@@ -54,6 +56,13 @@ class MembersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    @objc func selectMembers() {
+        
+        self.tableView.allowsMultipleSelection = true
+        
+        
     }
 
 }

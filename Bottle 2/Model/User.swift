@@ -9,12 +9,12 @@
 import Foundation
 
 // struct returned by api:users
-struct User: Codable {
-    var id: Int?
-    var username: String?
-    var createdAt: String?
-    var updatedAt: String?
-}
+//struct User: Codable {
+//    var id: Int?
+//    var username: String?
+//    var createdAt: String?
+//    var updatedAt: String?
+//}
 
 struct UserResponse: Codable {
     var users: [User]?
