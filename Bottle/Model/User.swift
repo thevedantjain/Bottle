@@ -16,16 +16,16 @@ import Foundation
 //    var updatedAt: String?
 //}
 
-//struct UserResponse: Codable {
-//    var users: [User]?
-//}
-//
-//// struct returned by api:workspaceusers
-//struct WorkspaceUser: Codable {
-//    var userId: Int?
-//    var workspaceId: Int?
-//}
-//
-//struct WorkspaceUserResponse: Codable {
-//    var users: [WorkspaceUser]?
-//}
+struct UserResponse: Codable {
+    var users: [User]?
+}
+
+// struct returned by api:workspaceusers
+struct WorkspaceUser: Codable {
+    var userId: Int?
+    var workspaceId: Int?
+}
+
+struct WorkspaceUserResponse: Codable {
+    var users: [WorkspaceUser]?
+}

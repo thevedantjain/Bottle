@@ -8,15 +8,8 @@
 
 import UIKit
 import Alamofire
-import CoreData
 
 extension HomeCollectionViewController {
-    
-    /// Main networking function. All networking calls are made through this function.
-    /// - Note: Send -1 if either parameter is unavailable
-    /// Parameter userId: Int, user id of the current user.
-    /// Parameter workspaceId: Int, id of the current workspace.
-    /// Returns: Void  (sets all variables)
     
     func networking(userId: Int, workspaceId: Int, completion: @escaping () -> ()) {
         

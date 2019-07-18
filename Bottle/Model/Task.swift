@@ -20,7 +20,7 @@ import Foundation
 //    var project: Int?
 //    var workspace: Int?
 //}
-//
-//struct TaskResponse: Codable {
-//    var tasks: [Task]?
-//}
+
+struct TaskResponse: Codable {
+    var tasks: [Task]?
+}
