@@ -201,9 +201,9 @@ class TasksFormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         self.endEditing(true)
         // make requests
         
-        let createdBy: Int = homeCollectionViewControllerInstance?.mainUser?.id ?? 6
-        let assignedTo: Int = instance?.users[assignedPicker.selectedRow(inComponent: 0)].id ?? 5
-        let workspace: Int = homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace?.id ?? 1
+        let createdBy: Int = Int(homeCollectionViewControllerInstance?.mainUser?.id ?? 6)
+        let assignedTo: Int = Int(instance?.users[assignedPicker.selectedRow(inComponent: 0)].id ?? 5)
+        let workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
         let project: Int = 1
         
         createTask(title: title, details: details, createdBy: createdBy, assignedTo: assignedTo, workspace: workspace, project: project) {

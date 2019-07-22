@@ -83,13 +83,11 @@ class WorkspacesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace?.id == workspaces?[indexPath.item].id ?? -1 {
+        if UserDefaults.standard.integer(forKey: "selectedWorkspace") == workspaces?[indexPath.item].id ?? -1 {
             self.dismiss(animated: true, completion: nil)
         }
         else {
-            homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = workspaces?[indexPath.item]
-//            UserDefaults.standard.set(workspaces?[indexPath.item], forKey: "selectedWorkspace")
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(workspaces?[indexPath.item]), forKey:"selectedWorkspace")
+            UserDefaults.standard.set(workspaces?[indexPath.item].id, forKey: "selectedWorkspace")
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -117,7 +115,7 @@ class WorkspacesTableViewController: UITableViewController {
                 // set workspace variable to new workspace
                 // add the user to the workspace
                 // get workspace data
-                self.homeCollectionViewControllerInstance?.tabViewControllerInstance?.workspace = self.workspaces?.first
+                UserDefaults.standard.set(self.workspaces?.first, forKey: "selectedWorkspace")
                 completion()
                 break
             case .failure(let error):

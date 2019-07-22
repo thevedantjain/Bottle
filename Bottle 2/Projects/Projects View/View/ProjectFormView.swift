@@ -150,8 +150,8 @@ class ProjectFormView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         self.endEditing(true)
         // make requests
         
-        let createdBy: Int = homeCollectionViewControllerInstance?.mainUser?.id ?? 6
-        let workspace: Int = (homeCollectionViewControllerInstance?.workspaces[workspacePicker.selectedRow(inComponent: 0)].id)!
+        let createdBy: Int = Int(homeCollectionViewControllerInstance?.mainUser?.id ?? 6)
+        let workspace: Int = Int((homeCollectionViewControllerInstance?.workspaces[workspacePicker.selectedRow(inComponent: 0)].id)!)
         
         createProject(title: title , createdBy: createdBy, workspace: workspace) {
             self.instance?.handleDismiss()

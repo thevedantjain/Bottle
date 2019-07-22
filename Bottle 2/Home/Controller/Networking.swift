@@ -91,7 +91,6 @@ extension HomeCollectionViewController {
                         let response = try JSONDecoder().decode([User].self, from: data)
                         for element in response {
                             if element.username == name {
-                                print(element.username ?? "", "- found")
                                 completion(element)
                             }
                         }
@@ -137,7 +136,6 @@ extension HomeCollectionViewController {
                         let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
                         self.getUserDetails(users: response, completion: { (users) in
                             self.users = users
-                            print("got ", users.count, " users")
                             completion()
                         })
                     }
@@ -191,11 +189,6 @@ extension HomeCollectionViewController {
                                 // only one element
                                 userDetails = User(id: user.id, username: user.username, createdAt: user.createdAt, updatedAt: user.updatedAt)
                                 userDetailsArray.append(userDetails!)
-                                // already setting mainUser now
-                                // old code below
-                                //                                if userId! == self.tabViewControllerInstance?.userId! {
-                                //                                    self.mainUser = userDetails
-                                //                                }
                             }
                             if user.userId == users.last?.userId {completion(userDetailsArray)}
                         }
@@ -236,13 +229,11 @@ extension HomeCollectionViewController {
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
                         if response.isEmpty == true {
-                            print("no tasks for me")
                             completion(tasks)
                         }
                         for element in response {
                             tasks.append(element)
                             if element.id == response.last?.id {
-                                print(tasks.count, " tasks for me")
                                 completion(tasks)
                             }
                         }
@@ -284,13 +275,11 @@ extension HomeCollectionViewController {
                     do {
                         let response = try JSONDecoder().decode([Task].self, from: data)
                         if response.isEmpty == true {
-                            print("no tasks by me")
                             completion(tasks)
                         }
                         for element in response {
                             tasks.append(element)
                             if element.id == response.last?.id {
-                                print(tasks.count, " tasks by me")
                                 completion(tasks)
                             }
                         }
@@ -331,7 +320,6 @@ extension HomeCollectionViewController {
                     do {
                         let response = try JSONDecoder().decode([WorkspaceUser].self, from: data)
                         self.getWorkspaceDetails(ids: response, completion: { (workspacesArray) in
-                            print("got ", workspacesArray.count, " workspaces")
                             completion(workspacesArray)
                         })
                         
@@ -355,7 +343,6 @@ extension HomeCollectionViewController {
         
         // if no workspace is available
         if ids.isEmpty == true {
-            print("got no workspace")
             completion([])
             return
         }
@@ -423,13 +410,12 @@ extension HomeCollectionViewController {
                     do {
                         let response = try JSONDecoder().decode([Project].self, from: data)
                         if response.isEmpty == true {
-                            completion([Project(id: -1, name: "No projects found", createdBy: self.tabViewControllerInstance?.userId, createdAt: "", updatedAt: "", workspace: self.tabViewControllerInstance?.workspace?.id)])
+                            completion([Project(id: -1, name: "No projects found", createdBy: self.tabViewControllerInstance?.userId, createdAt: "", updatedAt: "", workspace: UserDefaults.standard.integer(forKey: "selectedWorkspace"))])
                             return
                         }
                         for element in response {
                             projectDetailsArray.append(element)
                             if element.id == response.last?.id {
-                                print("got ", projectDetailsArray.count, " projects")
                                 completion(projectDetailsArray)
                             }
                         }

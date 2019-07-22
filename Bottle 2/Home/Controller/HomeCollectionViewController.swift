@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 private let statsCellID = "statsCellID"
 private let tasksPaneCellID = "tasksPaneCellID"
@@ -64,9 +63,10 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
                         self.openWorkspaceView()
                     }
                 }
-                
                 else {
                     reloadData()
+                    // check if workspaceID is already saved in UserDefaults
+                    // get workspaces
                 }
                 
                 self.title = UserDefaults.standard.string(forKey: "username") ?? "User"
@@ -81,6 +81,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             UserDefaults.standard.set(false, forKey: "userLogin")
             presentLoginController()
         }
+        
     }
     
     func presentLoginController() {
@@ -172,8 +173,11 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     fileprivate func reloadData() {
-        networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: tabViewControllerInstance?.workspace?.id ?? 1) {
-            self.collectionView.reloadData()
+        if UserDefaults.standard.integer(forKey: "selectedWorkspace") != nil {
+            let workspace = UserDefaults.standard.integer(forKey: "selectedWorkspace")
+            networking(userId: self.tabViewControllerInstance?.userId ?? 6, workspaceId: workspace) {
+                self.collectionView.reloadData()
+            }
         }
     }
     

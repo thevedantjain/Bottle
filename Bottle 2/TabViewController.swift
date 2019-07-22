@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 class TabViewController: UITabBarController {
     
-    var workspace: Workspace? = Workspace(id: -1, name: "", createdBy: -1, createdAt: "", updatedAt: "")
     var userId: Int? = 6
     var users: [User] = []
     
@@ -22,10 +22,6 @@ class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let data = UserDefaults.standard.value(forKey:"selectedWorkspace") as? Data {
-            workspace = try? PropertyListDecoder().decode(Workspace.self, from: data)
-        }
         
         tabBar.isTranslucent = true
         

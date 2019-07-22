@@ -8,11 +8,11 @@
 
 import Foundation
 
-//struct Project: Codable {
-//    var id: Int?
-//    var name: String?
-//    var createdBy: Int?
-//    var createdAt: String?
-//    var updatedAt: String?
-//    var workspace: Int?
-//}
+struct Project: Codable {
+    var id: Int?
+    var name: String?
+    var createdBy: Int?
+    var createdAt: String?
+    var updatedAt: String?
+    var workspace: Int?
+}
